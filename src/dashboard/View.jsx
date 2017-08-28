@@ -1,3 +1,4 @@
+import {connect} from 'react-redux'
 import {View} from './components'
 
 const mapStateToProps = (state, ownProps) => {
@@ -8,4 +9,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {}
 }
 
-export default contact()(View)
+export default (View)

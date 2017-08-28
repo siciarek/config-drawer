@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 const View = ({definition}) => {
   return <section>
-    {JSON.stringify(definition)}
+    <pre>
+    {JSON.stringify(definition, null, 4)}
+    </pre>
   </section>
 }
 
