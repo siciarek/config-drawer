@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './app/App';
-import {Template} from './template'
+import {View} from './dashboard'
 
-ReactDOM.render(<App children={<Template/>} />, document.getElementById('root'));
+ReactDOM.render(<App children={<View/>} />, document.getElementById('root'));
 registerServiceWorker();
