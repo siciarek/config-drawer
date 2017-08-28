@@ -1,16 +1,17 @@
 import React from 'react';
 import {Header} from './components'
+import Menu from './components/Menu'
 
-const App = ({children}) => {
+const App = (props) => {
+
 
   return (
     <div>
       <Header title="Config drawer" subtitle="Smart configuration management tool"/>
-      <section className="section">
-        <div className="container">
-          {children}
-        </div>
-      </section>
+      <Menu router={props.router}/>
+      <div className="container">
+        {props.children}
+      </div>
     </div>
   )
 }

@@ -7,7 +7,7 @@ const Sections = ({name, description, definition, selectSection}) => {
     <section>
       <nav className="panel">
         <p className="panel-heading">
-          <strong>{name}</strong> {description}
+          <strong>{name.toUpperCase()}</strong> {description}
         </p>
         {
           map(definition, (val, key) => {
