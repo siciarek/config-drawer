@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const {project, branch} = ownProps.params
+  const {project, branch, definition} = ownProps.params
 
   return bindActionCreators({
     init: () => fetchConfigDefinition(project, branch),

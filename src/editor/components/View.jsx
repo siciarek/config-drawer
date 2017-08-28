@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 
 class View extends React.Component {
 
+  componentWillMount() {
+    this.props.init()
+  }
+
   render() {
 
     const {name, description, definition} = this.props
@@ -23,13 +27,12 @@ class View extends React.Component {
 View.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  definition: PropTypes.object.isRequired,
+  definition: PropTypes.object,
 }
 
 View.defaultProps = {
   name: 'Config',
   description: '',
-  definition: {},
 }
 
 export {View}

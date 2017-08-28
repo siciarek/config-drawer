@@ -7,7 +7,7 @@ const parseValue = (val) => {
     : <pre>{JSON.stringify(val, null, 4)}</pre>
 }
 
-const Data = ({name, data}) => {
+const Data = ({name, data, select}) => {
 
   return (
     <section>
@@ -19,10 +19,10 @@ const Data = ({name, data}) => {
           Object.keys(data).map(key => {
             const val = data[key]
             return (
-              <a key={key} className="panel-block">
+              <a key={key} className="panel-block" onClick={() => select({key: key, value: val})}>
                 <div className=""><strong>{key}</strong></div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div className="">{parseValue(val)}</div>
+                <div>{parseValue(val)}</div>
               </a>
             )
           })
