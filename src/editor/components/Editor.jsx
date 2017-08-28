@@ -37,9 +37,11 @@ class Editor extends React.Component {
               <article className="media">
                 <div className="media-content">
                   <div className="content">
+                    <h2>Edit variable</h2>
+                    <hr/>
                     <VariableForm initialValues={selectedVariable}
                                   cancel={deselect}
-                                  handleSubmit={data => console.log(data)}/>
+                                  onSubmit={data => console.log(data)}/>
                   </div>
                 </div>
               </article>
