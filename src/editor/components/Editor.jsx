@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Sections} from './Sections'
 import {Data} from './Data'
+import VariableForm from "./VariableForm"
 
 class Editor extends React.Component {
 
@@ -21,9 +22,6 @@ class Editor extends React.Component {
 
     const {name, description, definition, select, deselect, selectedVariable} = this.props
 
-    console.log(JSON.stringify({selected: selectedVariable}, null, 4))
-
-
     const {section} = this.state
 
     const dataPanel = !section ? null :
@@ -39,17 +37,9 @@ class Editor extends React.Component {
               <article className="media">
                 <div className="media-content">
                   <div className="content">
-
-                    <div className="field">
-                      <label className="label">Key</label>
-                      <input className="input" name="key" type="text" placeholder="Insert value" value={selectedVariable.key}/>
-                    </div>
-
-                    <div className="field">
-                      <label className="label">Value</label>
-                      <input className="input" name="value" type="text" placeholder="Insert value" value={selectedVariable.value}/>
-                    </div>
-
+                    <VariableForm initialValues={selectedVariable}
+                                  cancel={deselect}
+                                  handleSubmit={data => console.log(data)}/>
                   </div>
                 </div>
               </article>
@@ -79,13 +69,12 @@ class Editor extends React.Component {
 Editor.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  definition: PropTypes.object.isRequired,
+  definition: PropTypes.object,
 }
 
 Editor.defaultProps = {
   name: 'Config',
   description: '',
-  definition: {},
 }
 
 export {Editor}

@@ -27,13 +27,12 @@ const Sections = ({name, description, definition, selectSection}) => {
 }
 
 Sections.propTypes = {
-  definition: PropTypes.object.isRequired,
+  definition: PropTypes.object,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 }
 
 Sections.defaultProps = {
-  definition: {},
   name: 'Config',
   description: '',
 }
