@@ -9,8 +9,8 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={List}/>
 
-    <Route path="editor/:project/:branch" component={Editor}/>
-    <Route path="view/:project/:branch" component={View}/>
+    <Route name="editor" path="editor/:project/:branch" component={Editor}/>
+    <Route name="view" path="view/:project/:branch" component={View}/>
 
     <Route path="*" component={PageNotFound}/>
   </Route>

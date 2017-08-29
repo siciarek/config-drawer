@@ -24,8 +24,9 @@ class Editor extends React.Component {
 
     const {section} = this.state
 
-    const dataPanel = !section ? null :
-      <Data name={section} data={definition[section]} select={select}/>
+    const dataPanel = !section
+      ? null
+      : <Data name={section} data={definition[section]} select={select}/>
 
     const modal = selectedVariable === null
       ? null
@@ -40,7 +41,7 @@ class Editor extends React.Component {
                     <h2>Edit variable</h2>
                     <hr/>
                     <VariableForm
-                      initialValues={selectedVariable}
+                      initialValues={{...selectedVariable, section: section}}
                       onSubmit={submit}
                       cancel={deselect}
                     />

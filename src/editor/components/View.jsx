@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 
 class View extends React.Component {
 
-  componentWillMount() {
-    this.props.init()
-  }
-
   render() {
 
     const {name, description, definition} = this.props

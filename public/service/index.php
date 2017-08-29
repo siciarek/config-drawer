@@ -4,7 +4,7 @@ $data = new \stdClass();
 
 if($_GET) {
 
-    if(array_key_exists('/list', $_GET)) {
+    if(array_key_exists('/configuration', $_GET)) {
         $output = explode("\n", `ls -R data/*`);
         $output = array_filter($output);
         $output = array_values($output);
@@ -37,7 +37,7 @@ if($_GET) {
     }
     else {
         $keys = array_keys($_GET);
-        list($null, $service, $project, $branch) = explode('/', array_pop($keys));
+        list($null, $resource, $project, $branch) = explode('/', array_pop($keys));
 
         $path = implode(DIRECTORY_SEPARATOR, [__DIR__, 'data', $project]);
         $filename = sprintf('%s%sconfig.ini.%s', $path, DIRECTORY_SEPARATOR, $branch);
