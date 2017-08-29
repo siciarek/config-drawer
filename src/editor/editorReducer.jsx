@@ -1,4 +1,5 @@
 import {
+  CONFIG_VARIABLE_UPDATE,
   CONFIG_VARIABLE_SELECT,
   CONFIG_VARIABLE_DESELECT,
   CONFIG_LIST_FETCH_FULFILLED,
@@ -14,6 +15,14 @@ const defaultState = {
 export default (state = defaultState, action) => {
 
   switch (action.type) {
+    case CONFIG_VARIABLE_UPDATE: {
+      console.log(action.payload)
+
+      return {
+        ...state,
+        selected: null,
+      }
+    }
     case CONFIG_VARIABLE_SELECT: {
       return {
         ...state,

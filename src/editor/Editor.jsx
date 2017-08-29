@@ -4,6 +4,7 @@ import {
   fetchConfigDefinition,
   selectVariable,
   deselectVariable,
+  updateVariable,
 } from './EditorActions'
 import {Editor} from './components'
 
@@ -22,6 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const {project, branch} = ownProps.params
 
   return bindActionCreators({
+    submit: updateVariable,
     deselect: deselectVariable,
     select: selectVariable,
     init: () => fetchConfigDefinition(project, branch),

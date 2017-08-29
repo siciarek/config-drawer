@@ -20,7 +20,7 @@ class Editor extends React.Component {
 
   render() {
 
-    const {name, description, definition, select, deselect, selectedVariable} = this.props
+    const {name, description, definition, select, deselect, selectedVariable, submit} = this.props
 
     const {section} = this.state
 
@@ -39,9 +39,11 @@ class Editor extends React.Component {
                   <div className="content">
                     <h2>Edit variable</h2>
                     <hr/>
-                    <VariableForm initialValues={selectedVariable}
-                                  cancel={deselect}
-                                  onSubmit={data => console.log(data)}/>
+                    <VariableForm
+                      initialValues={selectedVariable}
+                      onSubmit={submit}
+                      cancel={deselect}
+                    />
                   </div>
                 </div>
               </article>
