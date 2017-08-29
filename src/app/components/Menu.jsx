@@ -7,11 +7,14 @@ const Menu = (props) => {
 
   const tabs = project && branch
     ? [
+      <li key={1} className={pathname.startsWith('/editor') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/editor/${project}/${branch}`)}>Edit</a>
+      </li>,
       <li key={2} className={pathname.startsWith('/view') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/view/${project}/${branch}`)}>View</a>
       </li>,
-      <li key={1} className={pathname.startsWith('/editor') ? 'is-active' : null}>
-        <a onClick={() => props.router.push(`/editor/${project}/${branch}`)}>Edit</a>
+      <li key={3} className={pathname.startsWith('/diff') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/diff/${project}/${branch}`)}>Diff</a>
       </li>,
     ]
     : null
