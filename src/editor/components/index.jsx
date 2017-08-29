@@ -1,5 +1,6 @@
 export {Editor} from './Editor'
 export {View} from './View'
 export {List} from './List'
-export {Diff} from './Diff'
+export {Diffs} from './Diffs'
+export {Versions} from './Versions'
 export {VariableForm} from './VariableForm'

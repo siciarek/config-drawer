@@ -1,9 +1,11 @@
 import React from 'react'
 
 const Menu = (props) => {
-  const {router: {params: {project, branch}}} = props
+  const {router, diffs = 0, versions = 0} = props
 
-  const pathname = props.router.getCurrentLocation().pathname
+  const {params: {project, branch}} = router
+
+  const pathname = router.getCurrentLocation().pathname
 
   const tabs = project && branch
     ? [
@@ -13,8 +15,11 @@ const Menu = (props) => {
       <li key={2} className={pathname.startsWith('/view') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/view/${project}/${branch}`)}>View</a>
       </li>,
-      <li key={3} className={pathname.startsWith('/diff') ? 'is-active' : null}>
-        <a onClick={() => props.router.push(`/diff/${project}/${branch}`)}>Diff</a>
+      <li key={3} className={pathname.startsWith('/diffs') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/diffs/${project}/${branch}`)}>Diffs ({diffs})</a>
+      </li>,
+      <li key={4} className={pathname.startsWith('/versions') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/versions/${project}/${branch}`)}>Versions ({versions})</a>
       </li>,
     ]
     : null
@@ -32,4 +37,4 @@ const Menu = (props) => {
   )
 }
 
-export default Menu
+export default (Menu)

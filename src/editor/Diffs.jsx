@@ -1,6 +1,6 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {Diff} from './components'
+import {Diffs} from './components'
 
 const mapStateToProps = (state, ownProps) => {
   const {project, branch} = ownProps.params
@@ -21,4 +21,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Diff)
+export default connect(mapStateToProps, mapDispatchToProps)(Diffs)

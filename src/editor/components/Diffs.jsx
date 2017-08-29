@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
-import {convertToIniFormat} from '../../app/Utils'
+import {convertToIniFormat, difference} from '../../app/Utils'
 
 const parseValue = (val) => {
   switch (typeof val) {
@@ -25,24 +24,7 @@ const parseKeyValue = (key, val) => {
   return `${key}=${parseValue(val)}`
 }
 
-/**
- * Deep diff between two object, using lodash
- * @param  {Object} object Object compared
- * @param  {Object} base   Object to compare with
- * @return {Object}        Return a new object who represent the diff
- */
-function difference(object, base) {
-  function changes(object, base) {
-    return _.transform(object, function(result, value, key) {
-      if (!_.isEqual(value, base[key])) {
-        result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
-      }
-    });
-  }
-  return changes(object, base);
-}
-
-class Diff extends React.Component {
+class Diffs extends React.Component {
 
   render() {
 
@@ -66,31 +48,31 @@ class Diff extends React.Component {
       )
     }
 
-    const diff = difference(definition, original)
+    const diffs = difference(definition, original)
 
     return (
       <div className="columns">
         <div className="column is-half">
-        {convertToIniFormat(original, true, diff)}
+        {convertToIniFormat(original, true, diffs)}
         </div>
         <div className="column is-half">
-        {convertToIniFormat(definition, true, diff)}
+        {convertToIniFormat(definition, true, diffs)}
         </div>
       </div>
     )
   }
 }
 
-Diff.propTypes = {
+Diffs.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   definition: PropTypes.object,
   original: PropTypes.object,
 }
 
-Diff.defaultProps = {
+Diffs.defaultProps = {
   name: 'Config',
   description: '',
 }
 
-export {Diff}
+export {Diffs}

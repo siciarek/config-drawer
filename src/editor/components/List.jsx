@@ -28,12 +28,12 @@ class List extends React.Component {
               </p>
               {
                 projects.map((project, i) => (
-                  <a key={i} className="panel-block" onClick={() => this.setState({project})}>
+                  <a key={i} className={`panel-block ${this.state.project === project ? 'is-active' : null}`} onClick={() => this.setState({project})}>
 
               <span className="panel-icon">
                 <i className="fa fa-cog"/>
               </span>
-                    <strong>{project.toUpperCase()}</strong>
+                    <strong className={`${this.state.project === project ? 'has-text-primary' : null}`} >{project.toUpperCase()}</strong>
                   </a>
                 ))
               }

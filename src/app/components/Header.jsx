@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {saveConfigDefinition} from '../../editor/EditorActions'
+import {fetchConfigDefinition, saveConfigDefinition} from '../../editor/EditorActions'
 
-const Header = ({title, subtitle, dirty, save, project, branch, current}) =>
+const Header = ({title, subtitle, dirty, save, reset, project, branch, current}) =>
   <section className="hero is-primary">
     <div className="hero-body">
       <div className="container">
@@ -20,13 +20,23 @@ const Header = ({title, subtitle, dirty, save, project, branch, current}) =>
           <div className="column has-text-right">
             {
               dirty
-                ? <button
-                  onClick={() => save(project, branch, current)}
-                  type="button"
-                  title="Save config"
-                  className="button is-primary is-inverted is-large">
-                  Save config
-                </button>
+                ? [
+                  <button key={0}
+                    onClick={() => save(project, branch, current)}
+                    type="button"
+                    title="Save config"
+                    className="button is-primary is-inverted is-large">
+                    Save config
+                  </button>,
+                  <span key={1}>&nbsp;</span>,
+                  <button key={2}
+                    onClick={reset}
+                    type="button"
+                    title="Reset"
+                    className="button is-primary is-inverted is-large">
+                    Reset
+                  </button>
+                ]
                 : null
             }
           </div>
@@ -58,6 +68,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return bindActionCreators({
     save: (project, branch, data) => saveConfigDefinition(project, branch, data),
+    reset: () => window.location.reload(),
   }, dispatch)
 }
 

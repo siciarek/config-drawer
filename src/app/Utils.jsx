@@ -1,5 +1,6 @@
 import React from 'react';
 import renderHTML from 'react-render-html'
+import _ from 'lodash'
 
 const parseValue = (val) => {
   switch (typeof val) {
@@ -23,7 +24,39 @@ const parseKeyValue = (key, val, separator = "\n") => {
   return `${key}=${parseValue(val)}`
 }
 
-export const convertToIniFormat = (data, html = false, diff = {}) => {
+
+/**
+ * Deep diff between two object, using lodash
+ * @param  {Object} object Object compared
+ * @param  {Object} base   Object to compare with
+ * @return {Object}        Return a new object who represent the diff
+ */
+export const difference = (object, base) => {
+  const changes = (object, base) => {
+    return _.transform(object, function(result, value, key) {
+      if (!_.isEqual(value, base[key])) {
+        result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+      }
+    });
+  }
+  return changes(object, base);
+}
+
+
+export const differenceCount = (object, base) => {
+  const diff = difference(object, base)
+
+  const temp = Object.keys(diff).map((key, i) => {
+    return Object.keys(diff[key]).length
+  })
+
+  return temp.reduce((prev, curr) => {
+    return prev + curr
+  }, 0)
+}
+
+
+export const convertToIniFormat = (data, html = false, diffs = {}) => {
 
   var separator = html === true ? '<br/>' : "\n"
 
@@ -40,9 +73,9 @@ export const convertToIniFormat = (data, html = false, diff = {}) => {
         return val
       }
 
-      const res = Object.keys(diff).map((key, i) => {
+      const res = Object.keys(diffs).map((key, i) => {
         if (key === section) {
-          return Object.keys(diff[key]).map((vkey, i) => {
+          return Object.keys(diffs[key]).map((vkey, i) => {
             if (vkey === xkey) {
               return `<strong class="has-text-danger">${val}</strong>`
             }
