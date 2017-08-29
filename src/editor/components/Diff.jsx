@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
+import {convertToIniFormat} from '../../app/Utils'
 
 const parseValue = (val) => {
   switch (typeof val) {
@@ -21,6 +23,23 @@ const parseKeyValue = (key, val) => {
     return output.join("\n")
   }
   return `${key}=${parseValue(val)}`
+}
+
+/**
+ * Deep diff between two object, using lodash
+ * @param  {Object} object Object compared
+ * @param  {Object} base   Object to compare with
+ * @return {Object}        Return a new object who represent the diff
+ */
+function difference(object, base) {
+  function changes(object, base) {
+    return _.transform(object, function(result, value, key) {
+      if (!_.isEqual(value, base[key])) {
+        result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+      }
+    });
+  }
+  return changes(object, base);
 }
 
 class Diff extends React.Component {
@@ -47,59 +66,15 @@ class Diff extends React.Component {
       )
     }
 
+    const diff = difference(definition, original)
+
     return (
       <div className="columns">
         <div className="column is-half">
-      <pre className="panel-block">
-          {
-            `; Application configuration file [MODIFIED]
-; Project: ${name}
-; Branch: ${description}
-; Version: 1
-
-`
-          }
-        {
-          Object.keys(original).map((key, i) => {
-            const value = original[key]
-            const section = `[${key}]`
-            const values = Object.keys(value).map((key, i) => {
-              return parseKeyValue(key, value[key])
-            })
-
-            const temp = values.join("\n")
-            const sectionValues = temp.length === 0 ? '; SECTION IS EMPTY' : temp
-
-            return `${section}\n${sectionValues}\n\n`
-          })
-        }
-        </pre>
+        {convertToIniFormat(original, true, diff)}
         </div>
         <div className="column is-half">
-      <pre className="panel-block">
-          {
-            `; Application configuration file [ORIGINAL]
-; Project: ${name}
-; Branch: ${description}
-; Version: 1
-
-`
-          }
-        {
-          Object.keys(original).map((key, i) => {
-            const value = definition[key]
-            const section = `[${key}]`
-            const values = Object.keys(value).map((key, i) => {
-              return parseKeyValue(key, value[key])
-            })
-
-            const temp = values.join("\n")
-            const sectionValues = temp.length === 0 ? '; SECTION IS EMPTY' : temp
-
-            return `${section}\n${sectionValues}\n\n`
-          })
-        }
-        </pre>
+        {convertToIniFormat(definition, true, diff)}
         </div>
       </div>
     )
