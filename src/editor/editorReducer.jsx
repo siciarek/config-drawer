@@ -1,4 +1,5 @@
 import {
+  CONFIG_PROJECT_UPDATE,
   CONFIG_VARIABLE_UPDATE,
   CONFIG_VARIABLE_SELECT,
   CONFIG_VARIABLE_DESELECT,
@@ -8,8 +9,8 @@ import {
 } from '../editor/EditorActionTypes'
 
 const defaultState = {
-  project: 'productcatalog',
-  branch: 'test',
+  project: null,
+  branch: null,
   selected: null,
   current: null,
   original: null,
@@ -26,14 +27,28 @@ export default (state = defaultState, action) => {
         original:  {...action.payload.data},
       }
     }
+    case CONFIG_PROJECT_UPDATE: {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    }
     case CONFIG_VARIABLE_UPDATE: {
       const variable = action.payload
-      const current = {...state.current, [variable.section]: {...state.current[variable.section], [variable.key]: variable.value}}
+
+      let current = {
+        ...state.current,
+        [variable.section]: {...state.current[variable.section], [variable.key]: variable.value},
+      }
+
+      if(variable.key !== variable.originalKey) {
+        delete(current[variable.section][variable.originalKey])
+      }
 
       return {
         ...state,
         selected: null,
-        current: current,
+        current: {...current},
       }
     }
     case CONFIG_VARIABLE_SELECT: {

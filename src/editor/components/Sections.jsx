@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {map} from 'lodash'
 
-const Sections = ({name, description, definition, selectSection}) => {
+const Sections = ({name, description, section, definition, selectSection}) => {
   return (
     <section>
       <nav className="panel">
@@ -12,11 +12,11 @@ const Sections = ({name, description, definition, selectSection}) => {
         {
           map(definition, (val, key) => {
             return (
-              <a key={key} className="panel-block" onClick={() => selectSection(key)}>
+              <a key={key} className={`panel-block ${section === key ? 'is-active' : null}`} onClick={() => selectSection(key)}>
               <span className="panel-icon">
-                <i className="fa fa-folder"></i>
+                <i className={`fa ${section === key ? 'fa-check-square' : 'fa-square'}`}></i>
               </span>
-                {key}
+                <span className={`${section === key ? 'has-text-primary' : null}`}>{key}</span>
               </a>
             )
           })

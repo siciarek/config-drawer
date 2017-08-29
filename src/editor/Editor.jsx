@@ -5,6 +5,7 @@ import {
   selectVariable,
   deselectVariable,
   updateVariable,
+  updateProject,
 } from './EditorActions'
 import {Editor} from './components'
 
@@ -26,7 +27,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     submit: updateVariable,
     deselect: deselectVariable,
     select: selectVariable,
-    init: () => fetchConfigDefinition(project, branch),
+    init: () => {
+      dispatch(updateProject(project, branch))
+      return fetchConfigDefinition(project, branch)
+    }
   }, dispatch)
 }
 

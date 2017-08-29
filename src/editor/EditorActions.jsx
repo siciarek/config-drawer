@@ -3,6 +3,7 @@ import axios from 'axios'
 import config from '../app/config'
 
 import {
+  CONFIG_PROJECT_UPDATE,
   CONFIG_DEFINITION_SAVE,
   CONFIG_VARIABLE_UPDATE,
   CONFIG_VARIABLE_DESELECT,
@@ -16,10 +17,29 @@ export const saveConfigDefinition = (project, branch, data) => ({
   payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, JSON.stringify(data))
 })
 
-export const updateVariable = variable => ({
-  type: CONFIG_VARIABLE_UPDATE,
-  payload: variable
+export const updateProject = (project, branch) => ({
+  type: CONFIG_PROJECT_UPDATE,
+  payload: {project, branch}
 })
+
+export const updateVariable = variable => {
+
+  switch (variable.type) {
+    case 'boolean':
+      variable.value = variable.value === 'true'
+      break;
+    case 'array':
+      variable.value = variable.value.split(',').map(e => {
+        return e.match(/^\d+$/) ? parseInt(e) : e
+      })
+      break;
+  }
+
+  return {
+    type: CONFIG_VARIABLE_UPDATE,
+    payload: variable
+  }
+}
 
 export const selectVariable = variable => ({
   type: CONFIG_VARIABLE_SELECT,

@@ -4,6 +4,11 @@ import {Sections} from './Sections'
 import {Data} from './Data'
 import VariableForm from "./VariableForm"
 
+const getType = (value) => {
+  const type = typeof value
+  return Array.isArray(value) ? 'array' : type
+}
+
 class Editor extends React.Component {
 
   constructor(props) {
@@ -41,7 +46,12 @@ class Editor extends React.Component {
                     <h2>Edit variable</h2>
                     <hr/>
                     <VariableForm
-                      initialValues={{...selectedVariable, section: section}}
+                      initialValues={{
+                        ...selectedVariable,
+                        section: section,
+                        originalKey: selectedVariable.key,
+                        type: getType(selectedVariable.value),
+                      }}
                       onSubmit={submit}
                       cancel={deselect}
                     />
@@ -58,7 +68,10 @@ class Editor extends React.Component {
       <div>
         <div className="columns">
           <div className="column is-half">
-            <Sections name={name} selectSection={section => this.setState({section})} description={description}
+            <Sections name={name}
+                      description={description}
+                      section={this.state.section}
+                      selectSection={section => this.setState({section})}
                       definition={definition}/>
           </div>
           <div className="column">
