@@ -64,7 +64,7 @@ class Versions extends React.Component {
                     &nbsp; &nbsp; &nbsp;
                     <span>{version.createdAt}</span>
                     &nbsp; &nbsp; &nbsp;
-                    <span><em>{version.createdBy}</em></span>
+                    <span><em>{version.createdBy}</em>&nbsp;&nbsp;&nbsp;{i === 0 ? '<current>' : null }</span>
                   </a>
                 })
               }

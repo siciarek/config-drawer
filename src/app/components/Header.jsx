@@ -4,8 +4,10 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchConfigDefinition, saveConfigDefinition} from '../../editor/EditorActions'
 
-const Header = ({title, subtitle, dirty, save, reset, project, branch, current}) =>
-  <section className="hero is-primary">
+const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, current}) => {
+
+
+  return <section className="hero is-primary">
     <div className="hero-body">
       <div className="container">
         <div className="columns is-vcentered">
@@ -22,18 +24,18 @@ const Header = ({title, subtitle, dirty, save, reset, project, branch, current})
               dirty
                 ? [
                   <button key={0}
-                    onClick={() => save(project, branch, current)}
-                    type="button"
-                    title="Save config"
-                    className="button is-primary is-inverted is-large">
+                          onClick={() => save(project, branch, current)}
+                          type="button"
+                          title="Save config"
+                          className="button is-primary is-inverted is-large">
                     Save config
                   </button>,
                   <span key={1}>&nbsp;</span>,
                   <button key={2}
-                    onClick={reset}
-                    type="button"
-                    title="Reset"
-                    className="button is-primary is-inverted is-large">
+                          onClick={reset}
+                          type="button"
+                          title="Reset"
+                          className="button is-primary is-inverted is-large">
                     Reset
                   </button>
                 ]
@@ -43,7 +45,15 @@ const Header = ({title, subtitle, dirty, save, reset, project, branch, current})
         </div>
       </div>
     </div>
+    <div className="hero-foot">
+      <div className="container">
+        <nav className="tabs is-boxed">
+          {menu}
+        </nav>
+      </div>
+    </div>
   </section>
+}
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,

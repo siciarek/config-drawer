@@ -8,8 +8,8 @@ const App = ({children, router, versions, changes}) => {
 
   return (
     <div>
-      <Header/>
-      <Menu router={router} changes={changes} versions={versions}/>
+      <Header menu={<Menu router={router} changes={changes} versions={versions}/>}/>
+      <br/>
       <div className="container">
         {children}
       </div>

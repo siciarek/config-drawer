@@ -42,7 +42,7 @@ class Changes extends React.Component {
             <p>Info</p>
           </div>
           <div className="message-body">
-            No changes have been made.
+            No changes have been detected.
           </div>
         </article>
       )

@@ -26,14 +26,12 @@ const Menu = (props) => {
 
 
   return (
-    <div className="container tabs">
-      <ul>
-        <li key={0} className={pathname === '/' ? 'is-active' : null}>
-          <a onClick={() => props.router.push('/')}>List</a>
-        </li>
-        {tabs}
-      </ul>
-    </div>
+    <ul>
+      <li key={0} className={pathname === '/' ? 'is-active' : null}>
+        <a onClick={() => props.router.push('/')}>List</a>
+      </li>
+      {tabs}
+    </ul>
   )
 }
 
