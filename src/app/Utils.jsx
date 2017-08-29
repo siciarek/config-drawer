@@ -65,7 +65,7 @@ export const convertToIniFormat = (data, html = false, diff = {}) => {
       return `[${section}]${separator}${sectionValues}`
     }
 
-    return `<span class="has-text-info">[${section}]</span>${separator}${sectionValues}`
+    return `<strong class="has-text-info">[${section}]</strong>${separator}${sectionValues}`
   })
 
   if(html === true) {

@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     name: project,
     description: branch,
     selectedVariable: state.editor.selected,
+    dirty: JSON.stringify(state.editor.current) !== JSON.stringify(state.editor.original),
   }
 }
 

@@ -20,7 +20,9 @@ class Editor extends React.Component {
   }
 
   componentWillMount() {
-    this.props.init()
+    if(this.props.dirty === false) {
+      this.props.init()
+    }
   }
 
   render() {
@@ -88,6 +90,7 @@ Editor.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   definition: PropTypes.object,
+  dirty: PropTypes.bool,
 }
 
 Editor.defaultProps = {
