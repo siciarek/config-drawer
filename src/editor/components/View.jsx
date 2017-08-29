@@ -37,7 +37,9 @@ class View extends React.Component {
     return (
       <pre className="panel-block">
           {
-            `; Application configuration file: project=${name}, branch=${description}
+            `; Application configuration file
+; Project: ${name}
+; Branch: ${description}
 ; Version: 1
 
 `
