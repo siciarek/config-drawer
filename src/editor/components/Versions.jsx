@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {convertToIniFormat} from '../../app/Utils'
 
 class Versions extends React.Component {
 
@@ -12,7 +13,7 @@ class Versions extends React.Component {
 
   render() {
 
-    const {project, branch, items, router} = this.props
+    const {project, branch, items, current, router} = this.props
 
     if (!project) {
       router.push('/')
@@ -40,9 +41,9 @@ class Versions extends React.Component {
             <p className="panel-heading">
               <strong>{project.toUpperCase()}</strong> {branch} <strong>ver. {this.state.version}</strong>
             </p>
-            <p className="panel-block">
-              vvvv
-            </p>
+            <pre className="panel-block" style={{backgroundColor: 'transparent'}}>
+              {convertToIniFormat(current)}
+            </pre>
           </nav>
         </section>
       </div>

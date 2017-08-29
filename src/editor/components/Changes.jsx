@@ -24,7 +24,7 @@ const parseKeyValue = (key, val) => {
   return `${key}=${parseValue(val)}`
 }
 
-class Diffs extends React.Component {
+class Changes extends React.Component {
 
   render() {
 
@@ -42,37 +42,37 @@ class Diffs extends React.Component {
             <p>Info</p>
           </div>
           <div className="message-body">
-            No changes detected.
+            No changes have been made.
           </div>
         </article>
       )
     }
 
-    const diffs = difference(definition, original)
+    const changes = difference(definition, original)
 
     return (
       <div className="columns">
         <div className="column is-half">
-        {convertToIniFormat(original, true, diffs)}
+        {convertToIniFormat(original, true, changes)}
         </div>
         <div className="column is-half">
-        {convertToIniFormat(definition, true, diffs)}
+        {convertToIniFormat(definition, true, changes)}
         </div>
       </div>
     )
   }
 }
 
-Diffs.propTypes = {
+Changes.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   definition: PropTypes.object,
   original: PropTypes.object,
 }
 
-Diffs.defaultProps = {
+Changes.defaultProps = {
   name: 'Config',
   description: '',
 }
 
-export {Diffs}
+export {Changes}

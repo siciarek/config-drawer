@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Menu = (props) => {
-  const {router, diffs = 0, versions = 0} = props
+  const {router, changes = 0, versions = 0} = props
 
   const {params: {project, branch}} = router
 
@@ -15,8 +15,8 @@ const Menu = (props) => {
       <li key={2} className={pathname.startsWith('/view') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/view/${project}/${branch}`)}>View</a>
       </li>,
-      <li key={3} className={pathname.startsWith('/diffs') ? 'is-active' : null}>
-        <a onClick={() => props.router.push(`/diffs/${project}/${branch}`)}>Diffs ({diffs})</a>
+      <li key={3} className={pathname.startsWith('/changes') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/changes/${project}/${branch}`)}>Changes ({changes})</a>
       </li>,
       <li key={4} className={pathname.startsWith('/versions') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/versions/${project}/${branch}`)}>Versions ({versions})</a>

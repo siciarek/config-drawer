@@ -56,7 +56,7 @@ export const differenceCount = (object, base) => {
 }
 
 
-export const convertToIniFormat = (data, html = false, diffs = {}) => {
+export const convertToIniFormat = (data, html = false, changes = {}) => {
 
   var separator = html === true ? '<br/>' : "\n"
 
@@ -73,9 +73,9 @@ export const convertToIniFormat = (data, html = false, diffs = {}) => {
         return val
       }
 
-      const res = Object.keys(diffs).map((key, i) => {
+      const res = Object.keys(changes).map((key, i) => {
         if (key === section) {
-          return Object.keys(diffs[key]).map((vkey, i) => {
+          return Object.keys(changes[key]).map((vkey, i) => {
             if (vkey === xkey) {
               return `<strong class="has-text-danger">${val}</strong>`
             }

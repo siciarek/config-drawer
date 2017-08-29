@@ -4,28 +4,30 @@ import {Menu} from './components'
 import {connect} from 'react-redux'
 import {differenceCount} from './Utils'
 
-const App = ({children, router, versions, diffs}) => {
+const App = ({children, router, versions, changes}) => {
 
   return (
     <div>
       <Header/>
-      <Menu router={router} diffs={diffs} versions={versions}/>
+      <Menu router={router} changes={changes} versions={versions}/>
       <div className="container">
         {children}
       </div>
+      <br/>
+      <br/>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  const diffs = differenceCount(state.editor.original, state.editor.current)
+  const changes = differenceCount(state.editor.original, state.editor.current)
   const temp = state.editor.list.filter(item => item.project === state.editor.project && item.branch === state.editor.branch)
 
   const vtemp = temp.length > 0 ? temp.pop() : {}
   const versions = typeof vtemp.versions === 'undefined' ? [] : vtemp.versions
 
   return {
-    diffs: diffs,
+    changes: changes,
     versions: versions.length,
   }
 }
