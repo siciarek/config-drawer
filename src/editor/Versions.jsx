@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {
   fetchConfigList,
   updateProject,
+  fetchConfigDefinition,
 } from './EditorActions'
 import {Versions} from './components'
 
@@ -19,9 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 
   return bindActionCreators({
-    init: () => {
-
-    }
+    fetch: (project, branch, version) => fetchConfigDefinition(project, branch, version)
   }, dispatch)
 }
 

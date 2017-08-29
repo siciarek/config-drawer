@@ -13,7 +13,7 @@ class Versions extends React.Component {
 
   render() {
 
-    const {project, branch, items, current, router} = this.props
+    const {project, branch, items, current, router, fetch} = this.props
 
     if (!project) {
       router.push('/')
@@ -27,7 +27,14 @@ class Versions extends React.Component {
       return null
     }
 
-    const {versions} = temp.pop()
+    const xtemp = temp.pop()
+
+    if (!xtemp) {
+      router.push('/')
+      return null
+    }
+
+    const {versions} = xtemp
 
     if (!versions) {
       return null
@@ -59,7 +66,10 @@ class Versions extends React.Component {
               </p>
               {
                 versions.map((version, i) => {
-                  return <a key={i} className={`panel-block ${this.state.version === version.number ? 'has-text-primary is-active' : null}`} onClick={() => this.setState({version: version.number})}>
+                  return <a key={i} className={`panel-block ${this.state.version === version.number ? 'has-text-primary is-active' : null}`} onClick={() => {
+                    this.setState({version: version.number})
+                    fetch(project, branch, version.number)
+                  }}>
                     <span><strong>{version.number}</strong></span>
                     &nbsp; &nbsp; &nbsp;
                     <span>{version.createdAt}</span>

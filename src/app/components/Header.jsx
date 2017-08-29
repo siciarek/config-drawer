@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchConfigDefinition, saveConfigDefinition} from '../../editor/EditorActions'
+import {convertToIniFormat} from '../Utils'
 
 const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, current}) => {
 
@@ -24,7 +25,7 @@ const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, cur
               dirty
                 ? [
                   <button key={0}
-                          onClick={() => save(project, branch, current)}
+                          onClick={() => save(project, branch, convertToIniFormat(current))}
                           type="button"
                           title="Save config"
                           className="button is-primary is-inverted is-large">

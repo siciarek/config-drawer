@@ -14,7 +14,7 @@ import {
 
 export const saveConfigDefinition = (project, branch, data) => ({
   type: CONFIG_DEFINITION_SAVE,
-  payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, JSON.stringify(data))
+  payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, data)
 })
 
 export const updateProject = (project, branch) => ({
@@ -51,10 +51,15 @@ export const deselectVariable = variable => ({
   payload: variable
 })
 
-export const fetchConfigDefinition = (project, branch) => ({
-  type: CONFIG_DEFINITION_FETCH,
-  payload: axios.get(`${config.serviceUrl}/configuration/${project}/${branch}`)
-})
+export const fetchConfigDefinition = (project, branch, version = null) => {
+  const url = version === null
+    ? `${config.serviceUrl}/configuration/${project}/${branch}`
+    : `${config.serviceUrl}/configuration/${project}/${branch}/${version}`
+  return {
+    type: CONFIG_DEFINITION_FETCH,
+    payload: axios.get(url)
+  }
+}
 
 export const fetchConfigList = () => ({
   type: CONFIG_LIST_FETCH,
