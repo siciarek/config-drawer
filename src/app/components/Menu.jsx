@@ -9,21 +9,20 @@ const Menu = (props) => {
 
   const tabs = project && branch
     ? [
-      <li key={1} className={pathname.startsWith('/editor') ? 'is-active' : null}>
+      <li key={1} className={pathname.startsWith('/versions') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/versions/${project}/${branch}`)}>Versions ({versions})</a>
+      </li>,
+      <li key={2} className={pathname.startsWith('/editor') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/editor/${project}/${branch}`)}>Edit</a>
       </li>,
-      <li key={2} className={pathname.startsWith('/view') ? 'is-active' : null}>
+      <li key={3} className={pathname.startsWith('/view') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/view/${project}/${branch}`)}>View</a>
       </li>,
-      <li key={3} className={pathname.startsWith('/changes') ? 'is-active' : null}>
+      <li key={4} className={pathname.startsWith('/changes') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/changes/${project}/${branch}`)}>Changes ({changes})</a>
-      </li>,
-      <li key={4} className={pathname.startsWith('/versions') ? 'is-active' : null}>
-        <a onClick={() => props.router.push(`/versions/${project}/${branch}`)}>Versions ({versions})</a>
       </li>,
     ]
     : null
-
 
   return (
     <ul>

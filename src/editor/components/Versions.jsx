@@ -11,12 +11,15 @@ class Versions extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.props.init()
+  }
+
   render() {
 
     const {project, branch, items, current, router, fetch} = this.props
 
     if (!project) {
-      router.push('/')
       return null
     }
 
@@ -74,7 +77,7 @@ class Versions extends React.Component {
                     &nbsp; &nbsp; &nbsp;
                     <span>{version.createdAt}</span>
                     &nbsp; &nbsp; &nbsp;
-                    <span><em>{version.createdBy}</em>&nbsp;&nbsp;&nbsp;{i === 0 ? '<current>' : null }</span>
+                    <span><em>{version.createdBy}</em>&nbsp;&nbsp;&nbsp;{this.state.version === version.number ? '<selected>' : null }</span>
                   </a>
                 })
               }

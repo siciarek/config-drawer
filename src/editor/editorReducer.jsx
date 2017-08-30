@@ -1,4 +1,5 @@
 import {
+  CONFIG_DEFINITION_RESET,
   CONFIG_PROJECT_UPDATE,
   CONFIG_VARIABLE_UPDATE,
   CONFIG_VARIABLE_SELECT,
@@ -9,17 +10,27 @@ import {
 } from '../editor/EditorActionTypes'
 
 const defaultState = {
-  project: null,
-  branch: null,
-  selected: null,
-  current: null,
-  original: null,
   list: [],
+
+  project: null,  // Project name
+  branch: null,   // Branch name
+  version: null,  // Version number
+
+  current: null,  // Data of currently selected version (mutable)
+  original: null, // Original data of currently selected version
+
+  selectedVariable: null, // Data of currently edited variable
 }
 
 export default (state = defaultState, action) => {
 
   switch (action.type) {
+    case CONFIG_DEFINITION_RESET: {
+      return {
+        ...state,
+        current: {...state.original},
+      }
+    }
     case CONFIG_DEFINITION_SAVE_FULFILLED: {
       return {
         ...state,
@@ -47,20 +58,20 @@ export default (state = defaultState, action) => {
 
       return {
         ...state,
-        selected: null,
+        selectedVariable: null,
         current: {...current},
       }
     }
     case CONFIG_VARIABLE_SELECT: {
       return {
         ...state,
-        selected: action.payload,
+        selectedVariable: action.payload,
       }
     }
     case CONFIG_VARIABLE_DESELECT: {
       return {
         ...state,
-        selected: null,
+        selectedVariable: null,
       }
     }
     case CONFIG_DEFINITION_FETCH_FULFILLED: {

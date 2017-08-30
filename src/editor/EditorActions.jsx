@@ -3,6 +3,7 @@ import axios from 'axios'
 import config from '../app/config'
 
 import {
+  CONFIG_DEFINITION_RESET,
   CONFIG_PROJECT_UPDATE,
   CONFIG_DEFINITION_SAVE,
   CONFIG_VARIABLE_UPDATE,
@@ -50,6 +51,8 @@ export const deselectVariable = variable => ({
   type: CONFIG_VARIABLE_DESELECT,
   payload: variable
 })
+
+export const resetConfigDefinition = variable => ({type: CONFIG_DEFINITION_RESET})
 
 export const fetchConfigDefinition = (project, branch, version = null) => {
   const url = version === null

@@ -2,7 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {fetchConfigDefinition, saveConfigDefinition} from '../../editor/EditorActions'
+import {
+  resetConfigDefinition,
+  fetchConfigDefinition,
+  saveConfigDefinition,
+} from '../../editor/EditorActions'
 import {convertToIniFormat} from '../Utils'
 
 const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, current}) => {
@@ -79,7 +83,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return bindActionCreators({
     save: (project, branch, data) => saveConfigDefinition(project, branch, data),
-    reset: () => window.location.reload(),
+    reset: resetConfigDefinition,
   }, dispatch)
 }
 

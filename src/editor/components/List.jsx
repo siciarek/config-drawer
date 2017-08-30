@@ -49,7 +49,8 @@ class List extends React.Component {
               </p>
               {
                 branches.map(({project, branch, versions: {length}}, i) => (
-                  <a key={i} className="panel-block" title="Click to select configuration file" onClick={() => router.push(`/editor/${project}/${branch}`)}>
+                  <a key={i} className="panel-block" title="Click to select configuration file"
+                     onClick={() => router.push(`/versions/${project}/${branch}`)}>
                      <span className="panel-icon">
                       <i className="fa fa-star"/>
                     </span>
