@@ -25,9 +25,9 @@ const VariableForm = ({handleSubmit, cancel}) =>
 
     <br/>
 
-    <button className="button is-primary">Submit</button>
-    &nbsp;
-    <button type="button" className="button is-link" onClick={cancel}>Cancel</button>
-  </form>
+    <button title="Cancel" type="button" className="button is-link" onClick={cancel}>Cancel</button>
+
+    <button title="Submit" className="button is-primary is-pulled-right">Submit</button>
+   </form>
 
 export default reduxForm({form: 'variableForm'})(VariableForm)

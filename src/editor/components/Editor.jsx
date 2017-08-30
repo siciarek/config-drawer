@@ -45,7 +45,7 @@ class Editor extends React.Component {
               <article className="media">
                 <div className="media-content">
                   <div className="content">
-                    <h2>Edit variable</h2>
+                    <h3>Edit variable</h3>
                     <hr/>
                     <VariableForm
                       initialValues={{

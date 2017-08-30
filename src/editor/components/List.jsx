@@ -48,12 +48,14 @@ class List extends React.Component {
                 <strong>{`${this.state.project === null ? null : this.state.project.toUpperCase()} branches`}</strong>
               </p>
               {
-                branches.map(({project, branch}, i) => (
+                branches.map(({project, branch, versions: {length}}, i) => (
                   <a key={i} className="panel-block" title="Click to select configuration file" onClick={() => router.push(`/editor/${project}/${branch}`)}>
                      <span className="panel-icon">
                       <i className="fa fa-star"/>
                     </span>
-                    {branch}
+                    <span>
+                      {branch} <em className="has-text-grey-light">{length === 1 ? '1 version' : `${length} versions`}</em>
+                    </span>
                   </a>
                 ))
               }

@@ -9,10 +9,11 @@ const App = ({children, router, versions, changes}) => {
   return (
     <div>
       <Header menu={<Menu router={router} changes={changes} versions={versions}/>}/>
-      <br/>
-      <div className="container">
-        {children}
-      </div>
+      <section className="section">
+        <div className="container">
+          {children}
+        </div>
+      </section>
       <br/>
       <br/>
     </div>
