@@ -13,9 +13,14 @@ import {
   CONFIG_DEFINITION_FETCH,
 } from './EditorActionTypes'
 
-export const saveConfigDefinition = (project, branch, data) => ({
+export const saveConfigDefinition = (project, branch, data) => dispatch => dispatch({
   type: CONFIG_DEFINITION_SAVE,
   payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, data)
+  .then(response => {
+    console.log('XXXXXX')
+    dispatch(fetchConfigList())
+    return response
+  })
 })
 
 export const updateProject = (project, branch, version = 0) => ({
@@ -64,7 +69,7 @@ export const fetchConfigDefinition = (project, branch, version = null) => {
   }
 }
 
-export const fetchConfigList = () => ({
+export const fetchConfigList = () => dispatch => dispatch({
   type: CONFIG_LIST_FETCH,
   payload: axios.get(`${config.serviceUrl}/configuration`)
 })

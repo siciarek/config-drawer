@@ -24,9 +24,6 @@ const Menu = (props) => {
       <li key={3} className={pathname.startsWith('/changes') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/changes/${project}/${branch}`)}>Changes ({changes})</a>
       </li>,
-      <li key={4} className={pathname.startsWith('/preview') ? 'is-active' : null}>
-        <a onClick={() => props.router.push(`/preview/${project}/${branch}`)}>Preview</a>
-      </li>,
       dirty === true ? null : <li key={5}>
         <a onClick={() => window.location.assign(`${config.serviceUrl}/configuration/${project}/${branch}/${version}/config.ini`)}>
           <span className="icon is-small"><i className="fa fa-download"></i></span>

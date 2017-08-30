@@ -13,7 +13,7 @@ const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, cur
 
 
   return <section className="hero is-primary">
-    <div className="hero-body">
+    <div className="section hero-body">
       <div className="container">
         <div className="columns is-vcentered">
           <div className="column">

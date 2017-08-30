@@ -132,9 +132,13 @@ if ($_GET) {
 
 if($format === 'ini') {
     header('Content-Type: text/plain');
+
+    $attachment = sprintf('%s.%s', $download, $format);
+
     if($download !== null) {
-        header('Content-Disposition: attachment; filename="'.$download . '.' . $format .'"');
+        header(sprintf('Content-Disposition: attachment; filename="%s"', $attachment));
     }
+
     readfile($filename);
     exit;
 }
