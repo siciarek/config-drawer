@@ -10,25 +10,27 @@ const parseValue = (val) => {
 const Data = ({name, data, select}) => {
 
   return (
-    <section>
-      <nav className="panel">
-        <p className="panel-heading">
-          <strong>{name}</strong>
-        </p>
-        {
-          Object.keys(data).map(key => {
-            const val = data[key]
-            return (
-              <a key={key} className="panel-block" onClick={() => select({key: key, value: val})}>
-                <div className=""><strong>{key}</strong></div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div>{parseValue(val)}</div>
-              </a>
-            )
-          })
-        }
-      </nav>
-    </section>
+    <div className="column is-half">
+      <section>
+        <nav className="panel">
+          <p className="panel-heading">
+            <strong>{name}</strong>
+          </p>
+          {
+            Object.keys(data).map(key => {
+              const val = data[key]
+              return (
+                <a key={key} className="panel-block" onClick={() => select({key: key, value: val})}>
+                  <div className=""><strong>{key}</strong></div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <div>{parseValue(val)}</div>
+                </a>
+              )
+            })
+          }
+        </nav>
+      </section>
+    </div>
   )
 }
 

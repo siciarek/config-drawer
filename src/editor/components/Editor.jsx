@@ -63,16 +63,14 @@ class Editor extends React.Component {
     return (
       <div>
         <div className="columns">
-          <div className="column is-half">
+          <div className="column">
             <Sections name={name}
                       description={description}
                       section={this.state.section}
                       selectSection={section => this.setState({section})}
                       definition={definition}/>
           </div>
-          <div className="column">
-            {dataPanel}
-          </div>
+          {dataPanel}
         </div>
         {modal}
       </div>

@@ -20,7 +20,7 @@ class List extends React.Component {
 
     return (
       <div className="columns">
-        <div className="column is-half">
+        <div className="column">
           <section>
             <nav className="panel">
               <p className="panel-heading">
