@@ -63,11 +63,13 @@ const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, cur
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
+  save: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 }
 
 Header.defaultProps = {
   title: 'Config drawer',
-  subtitle: 'Smart configuration management tool',
+  subtitle: 'Configuration goes easy.',
 }
 
 const mapStateToProps = state => {
