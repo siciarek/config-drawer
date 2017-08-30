@@ -1,13 +1,11 @@
 import React from 'react'
 
 const Menu = (props) => {
-  const {router, changes = 0, versions = 0} = props
+  const {router, changes = 0, versions = 0, version} = props
 
   const {params: {project, branch}} = router
 
   const pathname = router.getCurrentLocation().pathname
-
-  const version = 1;
 
   const tabs = project && branch
     ? [
@@ -25,8 +23,8 @@ const Menu = (props) => {
       <li key={4} className={pathname.startsWith('/changes') ? 'is-active' : null}>
         <a onClick={() => props.router.push(`/changes/${project}/${branch}`)}>Changes ({changes})</a>
       </li>,
-      <li key={3} className={pathname.startsWith('/view') ? 'is-active' : null}>
-        <a onClick={() => props.router.push(`/view/${project}/${branch}`)}>View</a>
+      <li key={3} className={pathname.startsWith('/preview') ? 'is-active' : null}>
+        <a onClick={() => props.router.push(`/preview/${project}/${branch}`)}>Preview</a>
       </li>,
     ]]
     : tabs
@@ -34,7 +32,7 @@ const Menu = (props) => {
   return (
     <ul>
       <li key={0} className={pathname === '/' ? 'is-active' : null}>
-        <a onClick={() => props.router.push('/')}>List</a>
+        <a onClick={() => props.router.push('/')}>Catalogue</a>
       </li>
       {xtabs}
     </ul>

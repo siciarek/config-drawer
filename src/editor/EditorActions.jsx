@@ -18,9 +18,9 @@ export const saveConfigDefinition = (project, branch, data) => ({
   payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, data)
 })
 
-export const updateProject = (project, branch) => ({
+export const updateProject = (project, branch, version = 0) => ({
   type: CONFIG_PROJECT_UPDATE,
-  payload: {project, branch}
+  payload: {project, branch, version}
 })
 
 export const updateVariable = variable => {

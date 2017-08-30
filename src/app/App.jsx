@@ -4,11 +4,11 @@ import {Menu} from './components'
 import {connect} from 'react-redux'
 import {differenceCount} from './Utils'
 
-const App = ({children, router, versions, changes}) => {
+const App = ({children, router, versions, changes, version}) => {
 
   return (
     <div>
-      <Header menu={<Menu router={router} changes={changes} versions={versions}/>}/>
+      <Header menu={<Menu router={router} changes={changes} versions={versions} version={version}/>}/>
       <section className="section">
         <div className="container">
           {children}
@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
   const versions = typeof vtemp.versions === 'undefined' ? [] : vtemp.versions
 
   return {
+    version: state.editor.version,
     changes: changes,
     versions: versions.length,
   }

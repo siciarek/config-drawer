@@ -1,12 +1,12 @@
 import Editor from './Editor'
-import View from './View'
+import Preview from './Preview'
 import List from './List'
 import Changes from './Changes'
 import Versions from './Versions'
 
 export {
   Editor,
-  View,
+  Preview,
   List,
   Changes,
   Versions,

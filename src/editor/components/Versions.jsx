@@ -4,20 +4,13 @@ import {convertToIniFormat} from '../../app/Utils'
 
 class Versions extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      version: 0
-    }
-  }
-
   componentWillMount() {
     this.props.init()
   }
 
   render() {
 
-    const {project, branch, items, current, router, fetch} = this.props
+    const {project, branch, items, current, router, fetch, version} = this.props
 
     if (!project) {
       return null
@@ -40,16 +33,17 @@ class Versions extends React.Component {
     const {versions} = xtemp
 
     if (!versions) {
+      router.push('/')
       return null
     }
 
-    const configVersionPanel = this.state.version === 0
-    ? null
-    : <div className="column is-half">
+    const configVersionPanel = version === 0
+      ? null
+      : <div className="column is-half">
         <section>
           <nav className="panel">
             <p className="panel-heading">
-              <strong>{project.toUpperCase()}</strong> {branch} <strong>ver. {this.state.version}</strong>
+              <strong>{project.toUpperCase()}</strong> {branch} <strong>ver. {version}</strong>
             </p>
             <pre className="panel-block" style={{backgroundColor: 'transparent'}}>
               {convertToIniFormat(current)}
@@ -68,16 +62,17 @@ class Versions extends React.Component {
                 Versions of <strong>{project.toUpperCase()}</strong> {branch}
               </p>
               {
-                versions.map((version, i) => {
-                  return <a key={i} className={`panel-block ${this.state.version === version.number ? 'has-text-primary is-active' : null}`} onClick={() => {
-                    this.setState({version: version.number})
-                    fetch(project, branch, version.number)
-                  }}>
-                    <span><strong>{version.number}</strong></span>
+                versions.map(({number, createdAt, createdBy}, i) => {
+                  return <a key={i}
+                            className={`panel-block ${version === number ? 'has-text-primary is-active' : null}`}
+                            onClick={() => {
+                              fetch(project, branch, number)
+                            }}>
+                    <span><strong>{number}</strong></span>
                     &nbsp; &nbsp; &nbsp;
-                    <span>{version.createdAt}</span>
+                    <span>{createdAt}</span>
                     &nbsp; &nbsp; &nbsp;
-                    <span><em>{version.createdBy}</em>&nbsp;&nbsp;&nbsp;{this.state.version === version.number ? '<selected>' : null }</span>
+                    <em>{createdBy}</em>
                   </a>
                 })
               }

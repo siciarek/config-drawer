@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {convertToIniFormat} from '../../app/Utils'
 
-class View extends React.Component {
+class Preview extends React.Component {
 
   render() {
 
@@ -29,15 +29,15 @@ class View extends React.Component {
   }
 }
 
-View.propTypes = {
+Preview.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   definition: PropTypes.object,
 }
 
-View.defaultProps = {
+Preview.defaultProps = {
   name: 'Config',
   description: '',
 }
 
-export {View}
+export {Preview}

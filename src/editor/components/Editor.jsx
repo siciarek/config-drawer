@@ -19,12 +19,6 @@ class Editor extends React.Component {
     }
   }
 
-  componentWillMount() {
-    if(this.props.name === null || this.props.dirty === false) {
-      this.props.init()
-    }
-  }
-
   render() {
 
     const {name, description, definition, select, deselect, selectedVariable, submit} = this.props

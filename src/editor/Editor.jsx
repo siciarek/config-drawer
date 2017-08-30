@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
   const {project, branch} = ownProps.params
 
   return {
+    version: state.editor.version,
     definition: state.editor.current,
     name: project,
     description: branch,
@@ -28,10 +29,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     submit: updateVariable,
     deselect: deselectVariable,
     select: selectVariable,
-    init: () => {
-      dispatch(updateProject(project, branch))
-      return fetchConfigDefinition(project, branch)
-    }
   }, dispatch)
 }
 

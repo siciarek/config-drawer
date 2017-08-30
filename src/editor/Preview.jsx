@@ -1,6 +1,6 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {View} from './components'
+import {Preview} from './components'
 import {
   fetchConfigDefinition,
   updateProject,
@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(View)
+export default connect(mapStateToProps, mapDispatchToProps)(Preview)
