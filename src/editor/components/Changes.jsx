@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {convertToIniFormat, difference} from '../../app/Utils'
+import {jsonToIni, difference} from '../../app/Utils'
 
 const parseValue = (val) => {
   switch (typeof val) {
@@ -14,7 +14,7 @@ const parseValue = (val) => {
   return `****************************** ${JSON.stringify(val)} [${typeof val}] ******************************`
 }
 
-const parseKeyValue = (key, val) => {
+const parseIniKeyValue = (key, val) => {
   if (Array.isArray(val)) {
     const output = val.map((v, i) => {
       return `${key}[]=${v}`
@@ -53,10 +53,10 @@ class Changes extends React.Component {
     return (
       <div className="columns">
         <div className="column is-half">
-        {convertToIniFormat(original, true, changes)}
+        {jsonToIni(original, true, changes)}
         </div>
         <div className="column is-half">
-        {convertToIniFormat(definition, true, changes)}
+        {jsonToIni(definition, true, changes)}
         </div>
       </div>
     )

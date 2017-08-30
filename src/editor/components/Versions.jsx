@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {convertToIniFormat} from '../../app/Utils'
+import {jsonToIni} from '../../app/Utils'
 
 class Versions extends React.Component {
 
@@ -46,7 +46,7 @@ class Versions extends React.Component {
               <strong>{project.toUpperCase()}</strong> {branch} <strong>v{version}</strong>
             </p>
             <pre className="panel-block" style={{backgroundColor: 'transparent'}}>
-              {convertToIniFormat(current)}
+              {jsonToIni(current)}
             </pre>
           </nav>
         </section>

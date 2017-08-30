@@ -7,7 +7,7 @@ import {
   fetchConfigDefinition,
   saveConfigDefinition,
 } from '../../editor/EditorActions'
-import {convertToIniFormat} from '../Utils'
+import {jsonToIni} from '../Utils'
 
 const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, current}) => {
 
@@ -29,7 +29,7 @@ const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, cur
               dirty
                 ? [
                   <button key={0}
-                          onClick={() => save(project, branch, convertToIniFormat(current))}
+                          onClick={() => save(project, branch, jsonToIni(current))}
                           type="button"
                           title="Save config"
                           className="button is-primary is-inverted is-large">

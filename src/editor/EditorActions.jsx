@@ -17,7 +17,6 @@ export const saveConfigDefinition = (project, branch, data) => dispatch => dispa
   type: CONFIG_DEFINITION_SAVE,
   payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, data)
   .then(response => {
-    console.log('XXXXXX')
     dispatch(fetchConfigList())
     return response
   })
@@ -69,7 +68,7 @@ export const fetchConfigDefinition = (project, branch, version = null) => {
   }
 }
 
-export const fetchConfigList = () => dispatch => dispatch({
+export const fetchConfigList = () => ({
   type: CONFIG_LIST_FETCH,
   payload: axios.get(`${config.serviceUrl}/configuration`)
 })

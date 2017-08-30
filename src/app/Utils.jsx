@@ -3,6 +3,7 @@ import renderHTML from 'react-render-html'
 import _ from 'lodash'
 
 const parseValue = (val) => {
+
   switch (typeof val) {
     case 'string':
     case 'number':
@@ -11,17 +12,22 @@ const parseValue = (val) => {
       return JSON.stringify(val)
   }
 
-  return `****************************** ${JSON.stringify(val)} [${typeof val}] ******************************`
+  return val
 }
 
-const parseKeyValue = (key, val, separator = "\n") => {
+const getIniLine = (key, value) => {
+  return `${key} = ${value}`
+}
+
+const parseIniKeyValue = (key, val, separator = "\n") => {
   if (Array.isArray(val)) {
     const output = val.map((v, i) => {
-      return `${key}[]=${v}`
+      return getIniLine(`${key}[]`, v)
     })
     return output.join(separator)
   }
-  return `${key}=${parseValue(val)}`
+
+  return getIniLine(key, parseValue(val))
 }
 
 
@@ -56,7 +62,7 @@ export const differenceCount = (object, base) => {
 }
 
 
-export const convertToIniFormat = (data, html = false, changes = {}) => {
+export const jsonToIni = (data, html = false, changes = {}) => {
 
   var separator = html === true ? '<br/>' : "\n"
 
@@ -67,7 +73,7 @@ export const convertToIniFormat = (data, html = false, changes = {}) => {
     const values = Object.keys(value).map((key, i) => {
       const xkey = key
 
-      const val = parseKeyValue(key, value[key], separator)
+      const val = parseIniKeyValue(key, value[key], separator)
 
       if (html === false) {
         return val
@@ -98,7 +104,7 @@ export const convertToIniFormat = (data, html = false, changes = {}) => {
       return `[${section}]${separator}${sectionValues}`
     }
 
-    // return `<strong class="has-text-info">[${section}]</strong>${separator}${sectionValues}`
+    // return `<span class="has-text-info">[${section}]</span>${separator}${sectionValues}`
     return `[${section}]${separator}${sectionValues}`
   })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {convertToIniFormat} from '../../app/Utils'
+import {jsonToIni} from '../../app/Utils'
 
 class Preview extends React.Component {
 
@@ -23,7 +23,7 @@ class Preview extends React.Component {
         {/*; Version: __VERSION__*/}
 
         {/*`}        </pre>*/}
-        {convertToIniFormat(definition, true)}
+        {jsonToIni(definition, true)}
       </div>
     )
   }
