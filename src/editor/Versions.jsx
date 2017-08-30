@@ -24,9 +24,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({
     init: () => {
       dispatch(updateProject(project, branch, version))
-      return fetchConfigDefinition(project, branch)
+      return fetchConfigDefinition(project, branch, version)
     },
-    fetch: (project, branch, version = 0) => {
+    fetch: (project, branch, version) => {
       dispatch(updateProject(project, branch, version))
       return fetchConfigDefinition(project, branch, version)
     }

@@ -43,7 +43,7 @@ class Versions extends React.Component {
         <section>
           <nav className="panel">
             <p className="panel-heading">
-              <strong>{project.toUpperCase()}</strong> {branch} <strong>ver. {version}</strong>
+              <strong>{project.toUpperCase()}</strong> {branch} <strong>v{version}</strong>
             </p>
             <pre className="panel-block" style={{backgroundColor: 'transparent'}}>
               {convertToIniFormat(current)}

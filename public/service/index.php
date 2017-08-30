@@ -2,6 +2,7 @@
 $version = null;
 $format = null;
 $filename = null;
+$download = null;
 
 $data = new \stdClass();
 $output = explode("\n", `ls -R data/*`);
@@ -73,7 +74,12 @@ if ($_GET) {
 
         list($path, $format) = explode('_', $rawpath);
 
-        list($null, $resource, $project, $branch, $version) = explode('/', $path);
+        list($null, $resource, $project, $branch, $version, $download) = explode('/', $path);
+
+        if(preg_match('/^\d+$/', $version) === 0) {
+            $download = $version;
+            $version = null;
+        }
 
         $data = array_filter($srcdata, function ($e) use ($project, $branch) {
             return $e['project'] === $project && $e['branch'] === $branch;
@@ -126,6 +132,9 @@ if ($_GET) {
 
 if($format === 'ini') {
     header('Content-Type: text/plain');
+    if($download !== null) {
+        header('Content-Disposition: attachment; filename="'.$download . '.' . $format .'"');
+    }
     readfile($filename);
     exit;
 }
