@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {map} from 'lodash'
 
-const Sections = ({name, description, section, definition, selectSection}) => {
+const Sections = ({name, branch, section, definition, selectSection}) => {
 
-  if(!name) {
+  if (!name) {
     return null
   }
 
@@ -12,19 +12,17 @@ const Sections = ({name, description, section, definition, selectSection}) => {
     <section>
       <nav className="panel">
         <p className="panel-heading">
-          <strong className="is-uppercase">{name}</strong> {description}
+          <strong className="is-uppercase">{name}</strong> {branch}
         </p>
         {
-          map(definition, (val, key) => {
-            return (
-              <a key={key} className={`panel-block ${section === key ? 'is-active' : null}`} onClick={() => selectSection(key)}>
-              <span className="panel-icon">
-                <i className={`fa ${section === key ? 'fa-check-square' : 'fa-square'}`}></i>
-              </span>
-                <span className={`${section === key ? 'has-text-primary' : null}`}>{key}</span>
-              </a>
-            )
-          })
+          map(definition, (val, key) =>
+            <a key={key} className={`panel-block ${section === key ? 'is-active' : null}`}
+               onClick={() => selectSection(key)}>
+              <span className="panel-icon"><i
+                className={`fa ${section === key ? 'fa-check-square' : 'fa-square'}`}/></span>
+              <span className={`${section === key ? 'has-text-primary' : null}`}>{key}</span>
+            </a>
+          )
         }
       </nav>
     </section>

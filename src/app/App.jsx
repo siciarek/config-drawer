@@ -19,8 +19,22 @@ const App = ({children, router, versions, changes, version, dirty = false}) => {
           {children}
         </div>
       </section>
-      <br/>
-      <br/>
+      <footer className="footer">
+        <div className="container">
+          <div className="content has-text-centered">
+            <p>
+              <strong>Config drawer</strong> by <a href="http://github.com/siciarek">Jacek Siciarek</a>.
+              The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+              is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+            </p>
+            <p>
+              <a className="icon" href="https://github.com/siciarek/config-drawer">
+                <i className="fa fa-github"></i>
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

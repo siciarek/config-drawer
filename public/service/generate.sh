@@ -15,7 +15,7 @@ do
         do
             DIR=$BASE_DIR/$PROJECT/$BRANCH/$VERSION
             CREATED_AT=`date +'%Y-%m-%d %H:%M:%S'`
-            CREATED_BY='Czesław Olak'
+            CREATED_BY='Piotr Okrój'
             FILE=$DIR/config.ini
 
             mkdir -p $DIR

@@ -15,6 +15,7 @@ $resp = [];
 
 $creators = [
     'Cezary Kraśniewski',
+    'Piotr Okrój',
     'Łukasz Toporek',
     'Jacek Siciarek',
     'Dariusz Świeżyński',
@@ -33,7 +34,9 @@ $creators = [
     'Łukasz Toporek',
 ];
 
-$c = 0;
+$projects = explode("\n", trim(`ls -1 data|sort`));
+$authors = array_fill(0, count($projects), $creators);
+$authors = array_combine($projects, $authors);
 
 foreach ($output as $row) {
     $dir = preg_replace('/\D+$/', '', $row);
@@ -44,7 +47,7 @@ foreach ($output as $row) {
     $resp[$project.'-'.$branch]['versions'][] = [
         'number' => (int)$version,
         'createdAt' => date('Y-m-d H:i:s', filectime($file)),
-        'createdBy' => $creators[$c++ % count($creators)],
+        'createdBy' => $authors[$project][$version % count($authors[$project])],
     ];
 }
 
@@ -109,7 +112,10 @@ if ($_GET) {
         $version = max($temp);
 
         if ($method === 'POST') {
+
+
             $version++;
+            $createdBy = $authors[$project][$version];
 
             $dirname = implode(DIRECTORY_SEPARATOR, [__DIR__, 'data', $project, $branch, $version]);
             $result = mkdir($dirname, 0777, true);
@@ -117,13 +123,13 @@ if ($_GET) {
             $filename = implode(DIRECTORY_SEPARATOR, [__DIR__, 'data', $project, $branch, $version, 'config.ini']);
 
             $headerFile = implode(DIRECTORY_SEPARATOR, [__DIR__, 'src', 'header.txt']);
-            $header = file_get_contents($headerFile);
 
+            $header = file_get_contents($headerFile);
             $header = str_replace('__PROJECT__', $project, $header);
             $header = str_replace('__BRANCH__', $branch, $header);
             $header = str_replace('__VERSION__', $version, $header);
             $header = str_replace('__CREATED_AT__', date('Y-m-d H:i:s'), $header);
-            $header = str_replace('__CREATED_BY__', $creators[array_rand($creators)], $header);
+            $header = str_replace('__CREATED_BY__', $createdBy, $header);
 
             $content = file_get_contents("php://input");
 

@@ -39,7 +39,7 @@ class Versions extends React.Component {
 
     const configVersionPanel = version === 0
       ? null
-      : <div className="column is-half">
+      : <div className="column is-two-thirds">
         <section>
           <nav className="panel">
             <p className="panel-heading">
