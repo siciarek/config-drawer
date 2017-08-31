@@ -3,11 +3,16 @@ import PropTypes from 'prop-types'
 import {map} from 'lodash'
 
 const Sections = ({name, description, section, definition, selectSection}) => {
+
+  if(!name) {
+    return null
+  }
+
   return (
     <section>
       <nav className="panel">
         <p className="panel-heading">
-          <strong>{name.toUpperCase()}</strong> {description}
+          <strong className="is-uppercase">{name}</strong> {description}
         </p>
         {
           map(definition, (val, key) => {

@@ -8,6 +8,7 @@ import {
   CONFIG_DEFINITION_FETCH_FULFILLED,
   CONFIG_DEFINITION_SAVE_FULFILLED,
 } from '../editor/EditorActionTypes'
+import {CONFIG_RAW_FETCH_FULFILLED} from "./EditorActionTypes";
 
 const defaultState = {
   list: [],
@@ -15,9 +16,11 @@ const defaultState = {
   project: null,  // Project name
   branch: null,   // Branch name
   version: null,  // Version number
+  section: null,  // Section name
 
   current: null,  // Data of currently selected version (mutable)
   original: null, // Original data of currently selected version
+  raw: null,      // Raw data of currently selected version
 
   selectedVariable: null, // Data of currently edited variable
 }
@@ -72,6 +75,12 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         selectedVariable: null,
+      }
+    }
+    case CONFIG_RAW_FETCH_FULFILLED: {
+      return {
+        ...state,
+        raw: action.payload.data,
       }
     }
     case CONFIG_DEFINITION_FETCH_FULFILLED: {

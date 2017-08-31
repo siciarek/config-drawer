@@ -1,0 +1,10 @@
+;
+;     Application configuration file
+;
+;        Project: __PROJECT__
+;         Branch: __BRANCH__
+;        Version: __VERSION__
+;     Created at: __CREATED_AT__
+;     Created by: __CREATED_BY__
+;
+

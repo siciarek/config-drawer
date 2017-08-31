@@ -21,7 +21,11 @@ class Editor extends React.Component {
 
   render() {
 
-    const {name, description, definition, select, deselect, selectedVariable, submit} = this.props
+    const {project, branch, definition, select, deselect, selectedVariable, submit, router} = this.props
+
+    if(project === null) {
+      router.push('/')
+    }
 
     const {section} = this.state
 
@@ -64,8 +68,8 @@ class Editor extends React.Component {
       <div>
         <div className="columns">
           <div className="column">
-            <Sections name={name}
-                      description={description}
+            <Sections name={project}
+                      branch={branch}
                       section={this.state.section}
                       selectSection={section => this.setState({section})}
                       definition={definition}/>
@@ -79,15 +83,17 @@ class Editor extends React.Component {
 }
 
 Editor.propTypes = {
-  name: PropTypes.string,
-  description: PropTypes.string.isRequired,
+  project: PropTypes.string,
+  branch: PropTypes.string,
+  section: PropTypes.string,
   definition: PropTypes.object,
   dirty: PropTypes.bool,
 }
 
 Editor.defaultProps = {
-  name: null,
-  description: '',
+  project: null,
+  section: null,
+  branch: '',
 }
 
 export {Editor}

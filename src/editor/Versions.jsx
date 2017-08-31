@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     project: state.editor.project,
     branch: state.editor.branch,
     version: state.editor.version,
+    raw: state.editor.raw,
     items: state.editor.list,
     current: state.editor.current, // TODO: wyświetlać prawdziwe wersje
   }

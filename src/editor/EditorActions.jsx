@@ -10,6 +10,7 @@ import {
   CONFIG_VARIABLE_DESELECT,
   CONFIG_VARIABLE_SELECT,
   CONFIG_LIST_FETCH,
+  CONFIG_RAW_FETCH,
   CONFIG_DEFINITION_FETCH,
 } from './EditorActionTypes'
 
@@ -22,9 +23,14 @@ export const saveConfigDefinition = (project, branch, data) => dispatch => dispa
   })
 })
 
-export const updateProject = (project, branch, version = 0) => ({
+export const fetchRawData = (project, branch, version) => ({
+  type: CONFIG_RAW_FETCH,
+  payload: axios.get(`${config.serviceUrl}/configuration/${project}/${branch}/${version}.ini`),
+})
+
+export const updateProject = (project, branch, version = 0, section = null) => ({
   type: CONFIG_PROJECT_UPDATE,
-  payload: {project, branch, version}
+  payload: {project, branch, version, section}
 })
 
 export const updateVariable = variable => {
@@ -58,15 +64,15 @@ export const deselectVariable = variable => ({
 
 export const resetConfigDefinition = variable => ({type: CONFIG_DEFINITION_RESET})
 
-export const fetchConfigDefinition = (project, branch, version = null) => {
-  const url = version === null
-    ? `${config.serviceUrl}/configuration/${project}/${branch}`
+export const fetchConfigDefinition = (project, branch, version = null) => dispatch => dispatch({
+  type: CONFIG_DEFINITION_FETCH,
+  payload: axios.get(version === null ? `${config.serviceUrl}/configuration/${project}/${branch}`
     : `${config.serviceUrl}/configuration/${project}/${branch}/${version}`
-  return {
-    type: CONFIG_DEFINITION_FETCH,
-    payload: axios.get(url)
-  }
-}
+  ).then(response => {
+    dispatch(fetchRawData(project, branch, version))
+    return response
+  })
+})
 
 export const fetchConfigList = () => ({
   type: CONFIG_LIST_FETCH,

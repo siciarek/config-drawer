@@ -10,7 +10,7 @@ class Versions extends React.Component {
 
   render() {
 
-    const {project, branch, items, current, router, fetch, version} = this.props
+    const {project, branch, raw, items, current, router, fetch, version} = this.props
 
     if (!project) {
       return null
@@ -43,10 +43,10 @@ class Versions extends React.Component {
         <section>
           <nav className="panel">
             <p className="panel-heading">
-              <strong>{project.toUpperCase()}</strong> {branch} <strong>v{version}</strong>
+              <strong className="is-uppercase">{project}</strong> {branch} <strong>v{version}</strong>
             </p>
             <pre className="panel-block" style={{backgroundColor: 'transparent'}}>
-              {jsonToIni(current)}
+              {raw}
             </pre>
           </nav>
         </section>
@@ -59,7 +59,7 @@ class Versions extends React.Component {
           <section>
             <nav className="panel">
               <p className="panel-heading">
-                Versions of <strong>{project.toUpperCase()}</strong> {branch}
+                Versions of <strong className="is-uppercase">{project}</strong> {branch}
               </p>
               {
                 versions.map(({number, createdAt, createdBy}, i) => {

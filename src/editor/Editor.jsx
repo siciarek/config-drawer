@@ -9,8 +9,8 @@ import {Editor} from './components'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    name: state.editor.project,
-    description: state.editor.branch,
+    project: state.editor.project,
+    branch: state.editor.branch,
     version: state.editor.version,
     definition: state.editor.current,
     selectedVariable: state.editor.selectedVariable,

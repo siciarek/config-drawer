@@ -2,9 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const parseValue = (val) => {
-  return typeof val === 'string' || typeof val === 'number'
-    ? val
-    : <pre>{JSON.stringify(val, null, 4)}</pre>
+  switch(typeof val) {
+    case 'string':
+    case 'number':
+      return val
+    case 'boolean':
+      return JSON.stringify(val)
+    case 'object':
+      if(Array.isArray(val)) {
+        return val.join(', ')
+      }
+      break
+  }
+
+  return <pre>{JSON.stringify(val, null, 4)}</pre>
 }
 
 const Data = ({name, data, select}) => {

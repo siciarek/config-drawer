@@ -27,13 +27,13 @@ const Menu = (props) => {
       dirty === true ? null : <li key={5}>
         <a onClick={() => window.location.assign(`${config.serviceUrl}/configuration/${project}/${branch}/${version}/config.ini`)}>
           <span className="icon is-small"><i className="fa fa-download"></i></span>
-          <span>Download selected version</span>
+          <span>Download selected</span>
         </a>
       </li>,
       <li key={6}>
         <a onClick={() => window.location.assign(`${config.serviceUrl}/configuration/${project}/${branch}/config.ini`)}>
           <span className="icon is-small"><i className="fa fa-download"></i></span>
-          <span>Download latest version</span>
+          <span>Download latest</span>
         </a>
       </li>,
     ]]
@@ -42,7 +42,7 @@ const Menu = (props) => {
   return (
     <ul>
       <li key={0} className={pathname === '/' ? 'is-active' : null}>
-        <a onClick={() => props.router.push('/')}>Catalogue</a>
+        <a onClick={() => props.router.push('/')}>Projects</a>
       </li>
       {xtabs}
     </ul>

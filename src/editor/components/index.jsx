@@ -1,5 +1,4 @@
 export {Editor} from './Editor'
-export {Preview} from './Preview'
 export {List} from './List'
 export {Changes} from './Changes'
 export {Versions} from './Versions'

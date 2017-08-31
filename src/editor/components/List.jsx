@@ -23,8 +23,8 @@ class List extends React.Component {
         <div className="column">
           <section>
             <nav className="panel">
-              <p className="panel-heading">
-                <strong>{`Projects`.toUpperCase()}</strong>
+              <p className="panel-heading is-uppercase">
+                <strong>Projects</strong>
               </p>
               {
                 projects.map((project, i) => (
@@ -33,7 +33,7 @@ class List extends React.Component {
               <span className="panel-icon">
                 <i className="fa fa-cog"/>
               </span>
-                    <strong className={`${this.state.project === project ? 'has-text-primary' : null}`} >{project.toUpperCase()}</strong>
+                    <strong className={`${this.state.project === project ? 'has-text-primary' : null} is-uppercase`} >{project}</strong>
                   </a>
                 ))
               }
@@ -43,9 +43,10 @@ class List extends React.Component {
 
         <div className={`column ${branches.length === 0 ? 'is-hidden' : null}`}>
           <section>
+
             <nav className="panel">
               <p className="panel-heading">
-                <strong>{`${this.state.project === null ? null : this.state.project.toUpperCase()} branches`}</strong>
+                <strong className="is-uppercase">{`${this.state.project === null ? null : this.state.project}`}</strong> branches
               </p>
               {
                 branches.map(({project, branch, versions: {length}}, i) => (
@@ -55,7 +56,7 @@ class List extends React.Component {
                       <i className="fa fa-star"/>
                     </span>
                     <span>
-                      {branch} <em className="has-text-grey-light">{length === 1 ? '1 version' : `${length} versions`}</em>
+                      {branch} <em className="has-text-grey-light">{length === 1 ? 'single version' : `${length} versions`}</em>
                     </span>
                   </a>
                 ))

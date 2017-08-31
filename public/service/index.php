@@ -116,13 +116,23 @@ if ($_GET) {
 
             $filename = implode(DIRECTORY_SEPARATOR, [__DIR__, 'data', $project, $branch, $version, 'config.ini']);
 
+            $headerFile = implode(DIRECTORY_SEPARATOR, [__DIR__, 'src', 'header.txt']);
+            $header = file_get_contents($headerFile);
+
+            $header = str_replace('__PROJECT__', $project, $header);
+            $header = str_replace('__BRANCH__', $branch, $header);
+            $header = str_replace('__VERSION__', $version, $header);
+            $header = str_replace('__CREATED_AT__', date('Y-m-d H:i:s'), $header);
+            $header = str_replace('__CREATED_BY__', $creators[array_rand($creators)], $header);
+
             $content = file_get_contents("php://input");
-            file_put_contents($filename, $content);
+
+            file_put_contents($filename, $header);
+            file_put_contents($filename, $content, FILE_APPEND);
         }
 
         $filename = implode(DIRECTORY_SEPARATOR, [__DIR__, 'data', $project, $branch, $version, 'config.ini']);
         $filename = realpath($filename);
-
 
         $content = parse_ini_file($filename, true, INI_SCANNER_TYPED);
 

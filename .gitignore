@@ -1,6 +1,4 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-/public/service/data
-
 /temp
 
 /src/app/config.jsx
@@ -33,3 +31,6 @@ yarn-debug.log*
 yarn-error.log*
 
 public/doc/pdf/
+/public/service/data/
+package-lock.json
+public/service/src/config.ini
