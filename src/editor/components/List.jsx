@@ -41,7 +41,7 @@ class List extends React.Component {
           </section>
         </div>
 
-        <div className={`column ${branches.length === 0 ? 'is-hidden' : null}`}>
+        <div className={`column is-two-thirds ${branches.length === 0 ? 'is-hidden' : null}`}>
           <section>
 
             <nav className="panel">

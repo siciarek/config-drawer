@@ -21,7 +21,7 @@ const parseValue = (val) => {
 const Data = ({name, data, select}) => {
 
   return (
-    <div className="column is-half">
+    <div className="column  is-two-thirds">
       <section>
         <nav className="panel">
           <p className="panel-heading">

@@ -23,7 +23,7 @@ class Editor extends React.Component {
 
     const {project, branch, definition, select, deselect, selectedVariable, submit, router} = this.props
 
-    if(project === null) {
+    if (project === null) {
       router.push('/')
     }
 
@@ -37,7 +37,7 @@ class Editor extends React.Component {
       ? null
       : (
         <div id="modal" className="modal is-active">
-          <div className="modal-background"></div>
+          <div className="modal-background"/>
           <div className="modal-content">
             <div className="box">
               <article className="media">
