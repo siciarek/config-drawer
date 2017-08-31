@@ -1,14 +1,9 @@
 import React from 'react'
-import {Route, IndexRoute} from 'react-router'
+import {IndexRoute, Route} from 'react-router'
 
 import App from './App'
 import {PageNotFound} from './pages'
-import {
-  Editor,
-  List,
-  Changes,
-  Versions,
-} from '../editor'
+import {Changes, Editor, List, Versions,} from '../editor'
 
 export default (
   <Route path="/" component={App}>

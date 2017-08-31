@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {jsonToIni, difference} from '../../app/Utils'
+import {difference, jsonToIni} from '../../app/Utils'
 
 const parseValue = (val) => {
   switch (typeof val) {

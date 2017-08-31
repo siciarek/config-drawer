@@ -2,11 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {
-  resetConfigDefinition,
-  fetchConfigDefinition,
-  saveConfigDefinition,
-} from '../../editor/EditorActions'
+import {resetConfigDefinition, saveConfigDefinition,} from '../../editor/EditorActions'
 import {jsonToIni} from '../Utils'
 
 const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, current}) => {

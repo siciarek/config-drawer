@@ -1,5 +1,4 @@
-import {takeEvery, takeLatest, put, all} from 'redux-saga/effects'
-import {PENDING, FULFILLED, REJECTED} from 'redux-promise-middleware'
+import {all} from 'redux-saga/effects'
 
 // Root function
 

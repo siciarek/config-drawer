@@ -3,15 +3,15 @@ import axios from 'axios'
 import config from '../app/config'
 
 import {
+  CONFIG_DEFINITION_FETCH,
   CONFIG_DEFINITION_RESET,
-  CONFIG_PROJECT_UPDATE,
   CONFIG_DEFINITION_SAVE,
-  CONFIG_VARIABLE_UPDATE,
+  CONFIG_LIST_FETCH,
+  CONFIG_PROJECT_UPDATE,
+  CONFIG_RAW_FETCH,
   CONFIG_VARIABLE_DESELECT,
   CONFIG_VARIABLE_SELECT,
-  CONFIG_LIST_FETCH,
-  CONFIG_RAW_FETCH,
-  CONFIG_DEFINITION_FETCH,
+  CONFIG_VARIABLE_UPDATE,
 } from './EditorActionTypes'
 
 export const saveConfigDefinition = (project, branch, data) => dispatch => dispatch({

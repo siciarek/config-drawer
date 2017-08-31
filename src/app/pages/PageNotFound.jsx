@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import SystemPage from './SystemPage'
 
 const PageNotFound = ({code, message, icon}) => <SystemPage code={code} message={message} icon={icon}/>

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {jsonToIni} from '../../app/Utils'
 
 class Versions extends React.Component {
 

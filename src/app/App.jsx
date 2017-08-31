@@ -1,6 +1,5 @@
 import React from 'react';
-import {Header} from './components'
-import {Menu} from './components'
+import {Header, Menu} from './components'
 import {connect} from 'react-redux'
 import {differenceCount} from './Utils'
 

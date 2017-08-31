@@ -1,10 +1,6 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {
-  fetchConfigList,
-  updateProject,
-  fetchConfigDefinition,
-} from './EditorActions'
+import {fetchConfigDefinition, updateProject,} from './EditorActions'
 import {Versions} from './components'
 
 const mapStateToProps = (state, ownProps) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import {renderComponent, renderShallowComponent, getProps} from '../../utils/testHelper'
+import {getProps, renderComponent, renderShallowComponent} from '../../utils/testHelper'
 import PageNotFound from './PageNotFound'
 
 describe('PageNotFound', () => {

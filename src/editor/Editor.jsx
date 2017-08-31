@@ -1,10 +1,6 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {
-  selectVariable,
-  deselectVariable,
-  updateVariable,
-} from './EditorActions'
+import {deselectVariable, selectVariable, updateVariable,} from './EditorActions'
 import {Editor} from './components'
 
 const mapStateToProps = (state, ownProps) => {

@@ -2,7 +2,7 @@
  * SystemPage.spec.js
  */
 import React from 'react'
-import {renderComponent, renderShallowComponent, getProps} from '../../utils/testHelper'
+import {getProps, renderComponent, renderShallowComponent} from '../../utils/testHelper'
 import {lorem} from 'faker'
 import {expect} from 'chai'
 import {map} from 'lodash'
