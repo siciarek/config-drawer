@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router'
 
 class Versions extends React.Component {
 
@@ -7,32 +8,27 @@ class Versions extends React.Component {
     this.props.init()
   }
 
+
   render() {
 
     const {project, branch, raw, items, current, router, fetch, version} = this.props
 
-    if (!project) {
+
+    if (!items.length > 0) {
       return null
     }
 
     const temp = items.filter(i => i.project === project && i.branch === branch)
 
-    if (temp.count === 0) {
-      router.push('/')
-      return null
-    }
-
     const xtemp = temp.pop()
 
     if (!xtemp) {
-      router.push('/')
       return null
     }
 
     const {versions} = xtemp
 
     if (!versions) {
-      router.push('/')
       return null
     }
 
@@ -61,19 +57,14 @@ class Versions extends React.Component {
                 Versions of <strong className="is-uppercase">{project}</strong> {branch}
               </p>
               {
-                versions.map(({number, createdAt, createdBy}, i) => {
-                  return <a key={i}
-                            className={`panel-block ${version === number ? 'has-text-primary is-active' : null}`}
-                            onClick={() => {
-                              fetch(project, branch, number)
-                            }}>
-                    <span><strong>{number}</strong></span>
-                    &nbsp; &nbsp; &nbsp;
-                    <span>{createdAt}</span>
-                    &nbsp; &nbsp; &nbsp;
-                    <em>{createdBy}</em>
-                  </a>
-                })
+                versions.map(({number, createdAt, createdBy}, i) => <Link
+                  key={i}
+                  to={`/versions/${project}/${branch}/${number}`}
+                  onClick={() => fetch(project, branch, number)}
+                  className={`panel-block ${parseInt(version) === parseInt(number) ? 'has-text-primary is-active' : null}`}>
+                  <span><strong>{number}</strong></span>&nbsp;&nbsp;&nbsp;<span>{createdAt}</span>&nbsp;&nbsp;&nbsp;
+                  <em>{createdBy}</em>
+                </Link>)
               }
             </nav>
           </section>

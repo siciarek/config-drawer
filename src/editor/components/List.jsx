@@ -1,22 +1,21 @@
 import React from 'react'
+
 import {uniq} from 'lodash'
 
 class List extends React.Component {
 
   componentWillMount() {
     this.props.init()
-    this.state = {
-      project: null,
-    }
   }
 
   render() {
-    const {router, items} = this.props
+    const {router, items, branchName, projectName, update} = this.props
 
     const projects = uniq(items.map(({project, branch}) => project))
-    const branches = items.filter(item => item.project === this.state.project)
+    const branches = items.filter(item => item.project === projectName)
 
     return (
+
       <div className="columns">
         <div className="column">
           <section>
@@ -26,12 +25,15 @@ class List extends React.Component {
               </p>
               {
                 projects.map((project, i) => (
-                  <a key={i} className={`panel-block ${this.state.project === project ? 'is-active' : null}`} onClick={() => this.setState({project})}>
+                  <a key={i} className={`panel-block ${projectName === project ? 'is-active' : null}`}
+                     onClick={() => update(project)}>
 
               <span className="panel-icon">
                 <i className="fa fa-cog"/>
               </span>
-                    <strong className={`${this.state.project === project ? 'has-text-primary' : null} is-uppercase`} >{project}</strong>
+
+                    <strong
+                      className={`${projectName === project ? 'has-text-primary' : null} is-uppercase`}>{project}</strong>
                   </a>
                 ))
               }
@@ -44,17 +46,19 @@ class List extends React.Component {
 
             <nav className="panel">
               <p className="panel-heading">
-                <strong className="is-uppercase">{`${this.state.project === null ? null : this.state.project}`}</strong> branches
+                <strong className="is-uppercase">{`${projectName === null ? null : projectName}`}</strong> branches
               </p>
               {
-                branches.map(({project, branch, versions: {length}}, i) => (
-                  <a key={i} className="panel-block" title="Click to select configuration file"
-                     onClick={() => router.push(`/versions/${project}/${branch}`)}>
-                     <span className="panel-icon">
-                      <i className="fa fa-star"/>
+                branches.map(({project, branch, versions}, i) => (
+                  <a key={i} title="Click to select configuration file" onClick={() => {
+                    const url = `/versions/${project}/${branch}/${versions[0].number}`
+                    return router.replace(url)
+                  }} className={`panel-block ${branchName === branch ? 'is-active' : null}`}>
+                    <span className="panel-icon">
+                    <i className="fa fa-star"/>
                     </span>
-                    <span>
-                      {branch} <em className="has-text-grey-light">{length === 1 ? 'single version' : `${length} versions`}</em>
+                    <span className={`${branchName === branch ? 'has-text-primary' : null}`}>
+                    {branch} <em>{versions.length === 1 ? 'single version' : `${versions.length} versions`}</em>
                     </span>
                   </a>
                 ))

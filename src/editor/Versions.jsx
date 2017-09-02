@@ -1,6 +1,6 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {fetchConfigDefinition, updateProject,} from './EditorActions'
+import {fetchConfigDefinition, fetchConfigList, updateProject,} from './EditorActions'
 import {Versions} from './components'
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,10 +20,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return bindActionCreators({
     init: () => {
+      dispatch(fetchConfigList())
       dispatch(updateProject(project, branch, version))
       return fetchConfigDefinition(project, branch, version)
     },
     fetch: (project, branch, version) => {
+      dispatch(fetchConfigList())
       dispatch(updateProject(project, branch, version))
       return fetchConfigDefinition(project, branch, version)
     }

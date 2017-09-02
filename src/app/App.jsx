@@ -2,8 +2,9 @@ import React from 'react';
 import {Header, Menu} from './components'
 import {connect} from 'react-redux'
 import {differenceCount} from './Utils'
+import {Link} from 'react-router'
 
-const App = ({children, router, versions, changes, version, dirty = false}) => {
+const App = ({children, router, versions, project, changes, version, dirty = false}) => {
 
   return <div>
     <Header menu={<Menu
@@ -12,6 +13,20 @@ const App = ({children, router, versions, changes, version, dirty = false}) => {
       changes={changes}
       versions={versions}
       version={version}/>}/>
+
+    <nav className="navbar has-shadow">
+      <div className="container">
+        <div className="navbar-brand">
+          <Link className="navbar-item is-tab " to="/">
+            New project
+          </Link>
+          {!project || project === undefined ? null : <Link className="navbar-item is-tab " to="/">
+            New&nbsp;<strong className="is-uppercase">{project}</strong>&nbsp;branch
+          </Link>}
+        </div>
+      </div>
+    </nav>
+
     <section className="section">
       <div className="container">
         {children}
@@ -22,7 +37,8 @@ const App = ({children, router, versions, changes, version, dirty = false}) => {
         <div className="content has-text-centered">
           <p>
             <strong>Config drawer</strong> by <a href="http://github.com/siciarek">Jacek Siciarek</a>.
-            The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website
+            content
             is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
           </p>
           <p>
@@ -41,9 +57,10 @@ const mapStateToProps = (state) => {
   const temp = state.editor.list.filter(item => item.project === state.editor.project && item.branch === state.editor.branch)
 
   const vtemp = temp.length > 0 ? temp.pop() : {}
-  const versions = typeof vtemp.versions === 'undefined' ? [] : vtemp.versions
+  const versions = typeof vtemp.versions === 'undefined' || !Array.isArray(vtemp.versions) ? [] : vtemp.versions
 
   return {
+    project: state.editor.project,
     dirty: JSON.stringify(state.editor.current) !== JSON.stringify(state.editor.original),
     version: state.editor.version,
     changes: changes,

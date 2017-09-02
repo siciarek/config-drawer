@@ -2,17 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {map} from 'lodash'
 
-const Sections = ({name, branch, section, definition, selectSection}) => {
-
-  if (!name) {
-    return null
-  }
+const Sections = ({project, branch, section, definition, selectSection}) => {
 
   return (
     <section>
       <nav className="panel">
         <p className="panel-heading">
-          <strong className="is-uppercase">{name}</strong> {branch}
+          <strong className="is-uppercase">{project}</strong> {branch}
         </p>
         {
           map(definition, (val, key) =>
@@ -31,12 +27,12 @@ const Sections = ({name, branch, section, definition, selectSection}) => {
 
 Sections.propTypes = {
   definition: PropTypes.object,
-  name: PropTypes.string.isRequired,
+  project: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 }
 
 Sections.defaultProps = {
-  name: 'Config',
+  project: 'Config',
   description: '',
 }
 

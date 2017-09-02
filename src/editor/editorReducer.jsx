@@ -91,9 +91,10 @@ export default (state = defaultState, action) => {
       }
     }
     case CONFIG_LIST_FETCH_FULFILLED: {
+
       return {
         ...state,
-        list: action.payload.data,
+        list: [...action.payload.data],
       }
     }
     default:

@@ -1,5 +1,5 @@
 import SystemPage from './SystemPage'
 import PageNotFound from './PageNotFound'
-import Home from './Home'
+import Blank from './Blank'
 
-export {SystemPage, Home, PageNotFound}
+export {SystemPage, PageNotFound, Blank}

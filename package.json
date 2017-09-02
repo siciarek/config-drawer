@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.1",
+    "bulma-react": "0.0.8",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "prop-types": "^15.5.8",
@@ -26,10 +27,12 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "@kadira/react-storybook-addon-info": "^3.4.0",
-    "@kadira/storybook": "^2.35.3",
-    "@kadira/storybook-addon-knobs": "^1.7.1",
-    "@kadira/storybook-addon-options": "^1.0.2",
+    "@storybook/addon-actions": "^3.2.6",
+    "@storybook/addon-info": "^3.2.9",
+    "@storybook/addon-knobs": "^3.2.8",
+    "@storybook/addon-links": "^3.2.6",
+    "@storybook/addon-notes": "^3.2.7",
+    "@storybook/react": "^3.2.8",
     "babel-loader": "^7.0.0",
     "babel-plugin-module-resolver": "^2.7.1",
     "chai": "^4.1.0",

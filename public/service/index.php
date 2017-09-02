@@ -64,8 +64,9 @@ $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Max-Age: 1000");
-header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
+header("Access-Control-Allow-Headers: X-Meta-Data, X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
 header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
+header('Access-Control-Expose-Headers: X-Meta-Data');
 
 if ($_GET) {
 
@@ -145,6 +146,12 @@ if ($_GET) {
         $data = ($filename === false or $content === false) ? new \stdClass() : $content;
     }
 }
+
+header(sprintf('X-Meta-Data: %s', json_encode([
+    'project' => $project,
+    'branch' => $branch,
+    'version' => (int) $version,
+])));
 
 if($format === 'ini') {
     header('Content-Type: text/plain');

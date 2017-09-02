@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import config from '../app/config'
+import {browserHistory} from 'react-router'
 
 import {
   CONFIG_DEFINITION_FETCH,
@@ -18,6 +19,15 @@ export const saveConfigDefinition = (project, branch, data) => dispatch => dispa
   type: CONFIG_DEFINITION_SAVE,
   payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, data)
   .then(response => {
+
+    const {project, branch, version} = JSON.parse(response.headers['x-meta-data'])
+
+    const url = `/versions/${project}/${branch}/${version}`
+
+    dispatch(updateProject(project, branch, version))
+
+    browserHistory.push(url)
+
     dispatch(fetchConfigList())
     return response
   })

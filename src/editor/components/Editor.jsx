@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {Sections} from './Sections'
 import {Data} from './Data'
 import VariableForm from "./VariableForm"
+import {updateProject} from '../EditorActions'
 
 const getType = (value) => {
   const type = typeof value
@@ -11,23 +12,13 @@ const getType = (value) => {
 
 class Editor extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      section: null,
-    }
+  componentWillMount() {
+    this.props.init()
   }
 
   render() {
 
-    const {project, branch, definition, select, deselect, selectedVariable, submit, router} = this.props
-
-    if (project === null) {
-      router.push('/')
-    }
-
-    const {section} = this.state
+    const {project, branch, definition, section, update, version, select, deselect, selectedVariable, submit, router} = this.props
 
     const dataPanel = !section
       ? null
@@ -68,10 +59,10 @@ class Editor extends React.Component {
       <div>
         <div className="columns">
           <div className="column">
-            <Sections name={project}
+            <Sections project={project}
                       branch={branch}
-                      section={this.state.section}
-                      selectSection={section => this.setState({section})}
+                      section={section}
+                      selectSection={section => update(project, branch, version, section)}
                       definition={definition}/>
           </div>
           {dataPanel}
