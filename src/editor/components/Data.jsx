@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const parseValue = (val) => {
-  switch(typeof val) {
+  switch (typeof val) {
     case 'string':
     case 'number':
       return val
     case 'boolean':
       return JSON.stringify(val)
     case 'object':
-      if(Array.isArray(val)) {
+      if (Array.isArray(val)) {
         return val.join(', ')
       }
       break
@@ -22,25 +22,49 @@ const Data = ({name, data, select}) => {
 
   return (
     <div className="column is-two-thirds">
-      <section>
-        <nav className="panel">
-          <p className="panel-heading">
-            <strong>{name}</strong>
-          </p>
-          {
-            Object.keys(data).map(key => {
-              const val = data[key]
-              return (
-                <a key={key} className="panel-block" onClick={() => select({key: key, value: val})}>
-                  <div className=""><strong>{key}</strong></div>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <div>{parseValue(val)}</div>
+
+      <div className="columns">
+        <div className="column">
+          <h3 className="title">{name}</h3>
+        </div>
+        <div className="column">
+          <a title="Edit"
+             className="button is-small is-primary"
+             onClick={() => console.log({name})}
+          >
+            <i className="fa fa-edit"/>
+          </a>
+        </div>
+      </div>
+
+      <table className="table is-narrow">
+        <tbody>
+        {
+          Object.keys(data).map(key => {
+            const val = data[key]
+            return (
+              <tr key={key}>
+                <th>{key}</th>
+                <td>{parseValue(val)}</td>
+                <td>
+                  <a title="Edit"
+                     className="button is-small is-primary"
+                     onClick={() => select({key: key, value: val})}
+                  >
+                    <i className="fa fa-edit"/>
+                  </a> <a title="Remove"
+                          className="button is-small is-danger"
+                          onClick={() => console.log({key: key})}
+                >
+                  <i className="fa fa-times-circle"/>
                 </a>
-              )
-            })
-          }
-        </nav>
-      </section>
+                </td>
+              </tr>
+            )
+          })
+        }
+        </tbody>
+      </table>
     </div>
   )
 }
