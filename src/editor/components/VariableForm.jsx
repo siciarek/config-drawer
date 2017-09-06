@@ -1,7 +1,7 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 
-const renderTextField = ({label, input, meta: {touched, error, warning}, ...custom}) => {
+const renderField = ({label, input, meta: {touched, error, warning}, ...custom}) => {
 
   const valueField = typeof input.value === 'boolean' || typeof input.value === 'string' && input.value.match(/^true|false$/)
     ? <div className="select">
@@ -20,8 +20,8 @@ const renderTextField = ({label, input, meta: {touched, error, warning}, ...cust
 
 const VariableForm = ({handleSubmit, cancel}) =>
   <form onSubmit={handleSubmit}>
-    <Field name="key" label="Key" component={renderTextField}/>
-    <Field name="value" label="Value" component={renderTextField}/>
+    <Field name="key" label="Key" component={renderField}/>
+    <Field name="value" label="Value" component={renderField}/>
 
     <br/>
 

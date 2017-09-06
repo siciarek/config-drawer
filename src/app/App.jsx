@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {differenceCount} from './Utils'
 import {Link} from 'react-router'
 
+import './App.css'
+
 const App = ({children, router, versions, project, changes, version, dirty = false}) => {
 
   return <div>
@@ -20,7 +22,7 @@ const App = ({children, router, versions, project, changes, version, dirty = fal
           <Link className="navbar-item is-tab " to="/">
             New project
           </Link>
-          {!project || project === undefined ? null : <Link className="navbar-item is-tab " to="/">
+          {!project || project === undefined ? null : <Link className="navbar-item is-tab">
             New&nbsp;<strong className="is-uppercase">{project}</strong>&nbsp;branch
           </Link>}
         </div>

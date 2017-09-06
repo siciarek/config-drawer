@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 BASE_DIR=data
-PROJECTS="ino productcatalog taskbox cashbox wakacje"
+PROJECTS="ino productcatalog taskbox"
 BRANCHES="master test"
 VERSIONS=`seq 1 1 1` # first step last
 
@@ -28,7 +28,7 @@ do
             sed -i "s/__CREATED_AT__/$CREATED_AT/" $FILE
             sed -i "s/__CREATED_BY__/$CREATED_BY/" $FILE
 
-            cat ./src/config.ini >> $FILE
+            cat ./src/$PROJECT/config.ini >> $FILE
         done
     done
 
