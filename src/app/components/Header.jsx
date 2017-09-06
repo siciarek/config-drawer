@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {resetConfigDefinition, saveConfigDefinition,} from '../../editor/EditorActions'
 import {jsonToIni} from '../Utils'
+import config from '../config'
 
 const Header = ({title, subtitle, menu, dirty, save, reset, project, branch, current}) => {
 
@@ -64,8 +65,8 @@ Header.propTypes = {
 }
 
 Header.defaultProps = {
-  title: 'Config drawer',
-  subtitle: 'Configuration goes easy.',
+  title: config.app.name,
+  subtitle: config.app.description,
 }
 
 const mapStateToProps = state => {

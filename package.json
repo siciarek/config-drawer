@@ -39,7 +39,6 @@
     "enzyme": "^2.9.1",
     "faker": "^4.1.0",
     "jasmine-core": "^2.6.2",
-    "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "1.0.11",
@@ -49,8 +48,8 @@
     "sinon": "^2.4.1"
   },
   "scripts": {
-    "build-css": "node-sass src/ -o src/",
-    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
+    "build-css": "sass --update src",
+    "watch-css": "npm run build-css && sass --watch src&",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
