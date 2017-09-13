@@ -4,16 +4,11 @@ import {connect} from 'react-redux'
 import {createProject} from './ProjectActions'
 import {Creator} from './components'
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-
-  }
-}
-
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({
     create: createProject,
+    cancel: () => ownProps.router.push('/')
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Creator)
+export default connect(null, mapDispatchToProps)(Creator)
