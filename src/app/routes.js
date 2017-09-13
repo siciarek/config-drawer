@@ -4,11 +4,13 @@ import {IndexRoute, Route} from 'react-router'
 import App from './App'
 import {PageNotFound, Blank} from './pages'
 import {Changes, Editor, List, Versions,} from '../editor'
+import {Creator} from '../project'
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={List}/>
 
+    <Route name="create-project" path="project/create" component={Creator}/>
     <Route name="projects" path="project/:project" component={List}/>
 
     <Route name="editor" path="editor/:project/:branch/:version" component={Editor}/>

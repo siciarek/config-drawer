@@ -1,5 +1,3 @@
-/* global configuration */
-
 export const APP_ENV = process.env.NODE_ENV
 
 export const
@@ -7,36 +5,15 @@ export const
   ENV_TEST = 'test',
   ENV_PROD = 'production',
   STORAGE_TYPE_COOKIES = 'cookies',
-  STORAGE_TYPE_LOCAL = 'localStorage',
-  API_BASE_URLS = {
-    [ENV_DEV]: 'http://localhost:8000',
-    [ENV_TEST]: 'http://localhost:8000',
-    [ENV_PROD]: 'http://localhost:8000',
-  },
-  API_BASE_URL = API_BASE_URLS[APP_ENV]
+  STORAGE_TYPE_LOCAL = 'localStorage'
 
 export default {
-  version: '0.0.1',
   env: APP_ENV,
   locale: 'en',
-  appPicture: '/images/microphone.jpg',
-  appName: 'Songbook',
-  appDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDonec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.\nDonec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.\nAliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.',
-
-  storageType: STORAGE_TYPE_COOKIES,
-  notificationTimeout: 8,
-
-  authUrl: `${API_BASE_URL}/auth`,
-  pingUrl: `${API_BASE_URL}/ping`,
-  userDashboardUrl: `${API_BASE_URL}/user/dashboard`,
-  userProfileUrl: `${API_BASE_URL}/user/profile`,
-  genrecategoryUrl: `${API_BASE_URL}/genrecategory`,
-  dictionaryUrl: `${API_BASE_URL}/dictionary`,
-  genreUrl: `${API_BASE_URL}/genre`,
-  authorUrl: `${API_BASE_URL}/author`,
-  artistUrl: `${API_BASE_URL}/artist`,
-  lyricsUrl: `${API_BASE_URL}/lyrics`,
-  audioUrl: `${API_BASE_URL}/audio`,
-  videoUrl: `${API_BASE_URL}/video`,
-  songUrl: `${API_BASE_URL}/song`,
+  app: {
+    name: process.env.REACT_APP_NAME,
+    description: process.env.REACT_APP_DESCRIPTION,
+    version: process.env.REACT_APP_VERSION,
+  },
+  apiUrl: process.env.REACT_APP_API_URL,
 }

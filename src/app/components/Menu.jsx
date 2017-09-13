@@ -11,7 +11,7 @@ const Menu = (props) => {
 
   const tabs = project && branch
     ? [
-      <li key={0} className={pathname === '/' ? 'is-active' : null}>
+      <li key={0} className={ pathname === '/' ? 'is-active' : null}>
         <a onClick={() => props.router.push('/')}>Projects</a>
       </li>,
       <li key={1} className={pathname.startsWith('/versions') ? 'is-active' : null}>
@@ -34,14 +34,18 @@ const Menu = (props) => {
       </li>,
       dirty === true ? null : <li key={5}>
         <a
-          onClick={() => window.location.assign(`${config.serviceUrl}/configuration/${project}/${branch}/${version}/config.ini`)}>
-          <span className="icon is-small"><i className="fa fa-download"></i></span>
+          onClick={() => window.location.assign(`${config.apiUrl}/configuration/${project}/${branch}/${version}/config.ini`)}>
+          <span className="icon is-small">
+            <i className="fa fa-download"/>
+          </span>
           <span>Download selected</span>
         </a>
       </li>,
       <li key={6}>
-        <a onClick={() => window.location.assign(`${config.serviceUrl}/configuration/${project}/${branch}/config.ini`)}>
-          <span className="icon is-small"><i className="fa fa-download"></i></span>
+        <a onClick={() => window.location.assign(`${config.apiUrl}/configuration/${project}/${branch}/config.ini`)}>
+          <span className="icon is-small">
+            <i className="fa fa-download"/>
+          </span>
           <span>Download latest</span>
         </a>
       </li>,

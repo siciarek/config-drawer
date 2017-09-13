@@ -28,7 +28,7 @@ do
             sed -i "s/__CREATED_AT__/$CREATED_AT/" $FILE
             sed -i "s/__CREATED_BY__/$CREATED_BY/" $FILE
 
-            cat ./src/$PROJECT/config.ini >> $FILE
+            cat ./src/templates/    $PROJECT/config.ini >> $FILE
         done
     done
 

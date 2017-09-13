@@ -8,6 +8,8 @@ import './App.css'
 
 const App = ({children, router, versions, project, changes, version, dirty = false}) => {
 
+  const pathname = router.getCurrentLocation().pathname
+
   return <div>
     <Header menu={<Menu
       dirty={dirty}
@@ -19,7 +21,7 @@ const App = ({children, router, versions, project, changes, version, dirty = fal
     <nav className="navbar has-shadow">
       <div className="container">
         <div className="navbar-brand">
-          <Link className="navbar-item is-tab " to="/">
+          <Link className={`navbar-item is-tab ${pathname === '/project/create' ? 'is-active' : ''}`} to="/project/create">
             New project
           </Link>
           {!project || project === undefined ? null : <Link className="navbar-item is-tab">

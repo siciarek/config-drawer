@@ -17,7 +17,7 @@ import {
 
 export const saveConfigDefinition = (project, branch, data) => dispatch => dispatch({
   type: CONFIG_DEFINITION_SAVE,
-  payload: axios.post(`${config.serviceUrl}/configuration/${project}/${branch}`, data)
+  payload: axios.post(`${config.apiUrl}/configuration/${project}/${branch}`, data)
   .then(response => {
 
     const {project, branch, version} = JSON.parse(response.headers['x-meta-data'])
@@ -35,7 +35,7 @@ export const saveConfigDefinition = (project, branch, data) => dispatch => dispa
 
 export const fetchRawData = (project, branch, version) => ({
   type: CONFIG_RAW_FETCH,
-  payload: axios.get(`${config.serviceUrl}/configuration/${project}/${branch}/${version}.ini`),
+  payload: axios.get(`${config.apiUrl}/configuration/${project}/${branch}/${version}.ini`),
 })
 
 export const updateProject = (project, branch, version = 0, section = null) => ({
@@ -76,8 +76,8 @@ export const resetConfigDefinition = variable => ({type: CONFIG_DEFINITION_RESET
 
 export const fetchConfigDefinition = (project, branch, version = null) => dispatch => dispatch({
   type: CONFIG_DEFINITION_FETCH,
-  payload: axios.get(version === null ? `${config.serviceUrl}/configuration/${project}/${branch}`
-    : `${config.serviceUrl}/configuration/${project}/${branch}/${version}`
+  payload: axios.get(version === null ? `${config.apiUrl}/configuration/${project}/${branch}`
+    : `${config.apiUrl}/configuration/${project}/${branch}/${version}`
   ).then(response => {
     dispatch(fetchRawData(project, branch, version))
     return response
@@ -86,5 +86,5 @@ export const fetchConfigDefinition = (project, branch, version = null) => dispat
 
 export const fetchConfigList = () => ({
   type: CONFIG_LIST_FETCH,
-  payload: axios.get(`${config.serviceUrl}/configuration`)
+  payload: axios.get(`${config.apiUrl}/configuration`)
 })
