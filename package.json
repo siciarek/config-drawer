@@ -2,6 +2,7 @@
   "name": "config-drawer",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080/service?",
   "dependencies": {
     "axios": "^0.16.1",
     "bulma-react": "0.0.8",

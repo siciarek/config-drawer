@@ -24,6 +24,12 @@ const App = ({children, router, versions, project, changes, version, dirty = fal
           <Link className={`navbar-item is-tab ${pathname === '/project/create' ? 'is-active' : ''}`} to="/project/create">
             New project
           </Link>
+          <Link className={`navbar-item is-tab`} to="/project/create">
+            Vaghina
+          </Link>
+          <Link className={`navbar-item is-tab ${pathname === '/test' ? 'is-active' : ''}`} to="/test">
+            Test
+          </Link>
           {!project || project === undefined ? null : <Link className="navbar-item is-tab">
             New&nbsp;<strong className="is-uppercase">{project}</strong>&nbsp;branch
           </Link>}

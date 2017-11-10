@@ -1,4 +1,6 @@
 <?php
+define('CONFIG_BASE_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'data');
+
 $version = null;
 $format = null;
 $filename = null;
@@ -34,24 +36,37 @@ $creators = [
     'Łukasz Toporek',
 ];
 
-$projects = explode("\n", trim(`ls -1 data|sort`));
-$authors = array_fill(0, count($projects), $creators);
-$authors = array_combine($projects, $authors);
+/**
+ * @param $creators
+ * @param $output
+ * @param $resp
+ * @return array
+ */
+function getProjectList($creators, $output, $resp): array
+{
+    $projects = explode("\n", trim(`ls -1 data|sort`));
+    $authors = array_fill(0, count($projects), $creators);
+    $authors = array_combine($projects, $authors);
 
-foreach ($output as $row) {
-    $dir = preg_replace('/\D+$/', '', $row);
-    list($null, $project, $branch, $version) = explode(DIRECTORY_SEPARATOR, $dir);
-    $file = realpath($dir.DIRECTORY_SEPARATOR.'config.ini');
-    $resp[$project.'-'.$branch]['project'] = $project;
-    $resp[$project.'-'.$branch]['branch'] = $branch;
-    $resp[$project.'-'.$branch]['versions'][] = [
-        'number' => (int)$version,
-        'createdAt' => date('Y-m-d H:i:s', filectime($file)),
-        'createdBy' => $authors[$project][$version % count($authors[$project])],
-    ];
+    foreach ($output as $row) {
+        $dir = preg_replace('/\D+$/', '', $row);
+        list($null, $project, $branch, $version) = explode(DIRECTORY_SEPARATOR, $dir);
+        $file = realpath($dir.DIRECTORY_SEPARATOR.'config.ini');
+        $resp[$project.'-'.$branch]['project'] = $project;
+        $resp[$project.'-'.$branch]['branch'] = $branch;
+        $resp[$project.'-'.$branch]['versions'][] = [
+            'number' => (int)$version,
+            'createdAt' => date('Y-m-d H:i:s', filectime($file)),
+            'createdBy' => $authors[$project][$version % count($authors[$project])],
+        ];
+    }
+
+    $srcdata = array_values($resp);
+
+    return array($authors, $project, $branch, $version, $srcdata);
 }
 
-$srcdata = array_values($resp);
+list($authors, $project, $branch, $version, $srcdata) = getProjectList($creators, $output, $resp);
 
 for($i = 0; $i < count($srcdata);$i++) {
     usort($srcdata[$i]['versions'], function ($a, $b) {
@@ -67,6 +82,67 @@ header("Access-Control-Max-Age: 1000");
 header("Access-Control-Allow-Headers: X-Meta-Data, X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
 header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 header('Access-Control-Expose-Headers: X-Meta-Data');
+
+$path = '/';
+
+function slugify($string) {
+    $string = mb_convert_case($string, MB_CASE_LOWER, 'UTF-8');
+    $string = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+    $string = preg_replace('/\s+/', '-', $string);
+    return $string;
+}
+
+if(array_key_exists('/project/create', $_GET)) {
+    $path = '/project/create';
+}
+
+if($method === 'POST' and $path === '/project/create') {
+    $content = file_get_contents("php://input");
+    $data = json_decode($content, true);
+
+    $name = slugify($data['name']);
+    $description = $data['description'];
+    $branches = $data['branches'];
+
+    $projectDir = CONFIG_BASE_DIR . DIRECTORY_SEPARATOR . $name;
+
+    if(is_dir($projectDir)) {
+        $data = [
+            'message' => 'Project directory already exists.',
+            'code' => 403,
+        ];
+        header('HTTP/1.0 403 Forbidden');
+    }
+    else {
+        mkdir($projectDir, 0777, true);
+
+        $projectDir = realpath($projectDir);
+
+        foreach($branches as $branch) {
+            $branchDir = $projectDir . DIRECTORY_SEPARATOR . $branch . DIRECTORY_SEPARATOR . '1';
+            mkdir($branchDir, 0777, true);
+
+            $headerFile = implode(DIRECTORY_SEPARATOR, [__DIR__, 'src', 'header.txt']);
+
+            $header = file_get_contents($headerFile);
+            $header = str_replace('__PROJECT__', $project, $header);
+            $header = str_replace('__BRANCH__', $branch, $header);
+            $header = str_replace('__VERSION__', $version, $header);
+            $header = str_replace('__CREATED_AT__', date('Y-m-d H:i:s'), $header);
+            $header = str_replace('__CREATED_BY__', $createdBy, $header);
+
+            $content = file_get_contents(__DIR__ . '/src/template.ini');
+
+            $filename = $branchDir . DIRECTORY_SEPARATOR . 'config.ini';
+
+            file_put_contents($filename, $header);
+            file_put_contents($filename, $content, FILE_APPEND);
+        }
+    }
+
+    header('HTTP/1.0 200 OK');
+    exit;
+}
 
 if ($_GET) {
 
@@ -113,7 +189,6 @@ if ($_GET) {
         $version = max($temp);
 
         if ($method === 'POST') {
-
 
             $version++;
             $createdBy = $authors[$project][$version];

@@ -3,9 +3,7 @@ export const APP_ENV = process.env.NODE_ENV
 export const
   ENV_DEV = 'development',
   ENV_TEST = 'test',
-  ENV_PROD = 'production',
-  STORAGE_TYPE_COOKIES = 'cookies',
-  STORAGE_TYPE_LOCAL = 'localStorage'
+  ENV_PROD = 'production'
 
 export default {
   env: APP_ENV,

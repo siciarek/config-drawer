@@ -6,8 +6,13 @@ import {PageNotFound, Blank} from './pages'
 import {Changes, Editor, List, Versions,} from '../editor'
 import {Creator} from '../project'
 
+import TestIndex from '../test/Index'
+
 export default (
   <Route path="/" component={App}>
+
+    <Route name="test" path="/test" component={TestIndex}/>
+
     <IndexRoute component={List}/>
 
     <Route name="create-project" path="project/create" component={Creator}/>
